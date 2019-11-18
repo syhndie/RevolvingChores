@@ -1,0 +1,5 @@
+﻿Next steps:
+	create github repository
+	stage step-by-step changes, and commit each
+	switch database to postgres
+	add secrets file for postgres id, password
