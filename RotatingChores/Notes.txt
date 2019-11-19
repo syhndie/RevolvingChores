@@ -1,5 +1,9 @@
 ﻿Next steps:
-	create github repository
-	stage step-by-step changes, and commit each
-	switch database to postgres
-	add secrets file for postgres id, password
+	create priority enum
+	create chore class
+	decorate chore properties
+	scaffold crud pages for chore model
+	fix name of chore table to chores
+	create migration
+	update database
+	test
