@@ -7,34 +7,69 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RotatingChores.Data;
 using RotatingChores.Models;
+using Microsoft.AspNetCore.Identity;
+using RotatingChores.Data;
+using RotatingChores.Models.ViewModels;
 
 namespace RotatingChores.Pages.NewFolder.Chores
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BasePageModel
     {
-        private readonly RotatingChores.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(RotatingChores.Data.ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+
+        [BindProperty]
+        public ChoreVM NewChoreVM { get; set; }
+
+        public CreateModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            return Page();
-        }
 
-        [BindProperty]
-        public Chore Chore { get; set; }
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                DangerMessage = "Your new chore did not save correctly.";
+                return RedirectToPage();
             }
 
-            _context.Chores.Add(Chore);
+            Chore newChore = new Chore
+            {
+                UserID = _userManager.GetUserId(User),
+                Name = NewChoreVM.Name,
+                Description = NewChoreVM.Description,
+                DaysToRepeat = NewChoreVM.DaysToRepeat,
+                DateLastCompleted = NewChoreVM.DateLastCompleted,
+                Priority = NewChoreVM.Priority
+            };
+
+            if (newChore.UserID == null)
+            {
+                DangerMessage = "Your new chore did not save correctly.";
+                return RedirectToPage();
+            }
+
+            List<string> usedNames = _context.Chores
+                .Where(ch => ch.UserID == newChore.UserID)
+                .Select(ch => ch.Name)
+                .ToList();
+
+            if (usedNames.Contains(newChore.Name))
+            {
+                DangerMessage = "This Chore name is already used.";
+
+                return RedirectToPage();
+            }
+
+            _context.Chores.Add(newChore);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
