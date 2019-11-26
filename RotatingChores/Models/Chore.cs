@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using RotatingChores.Helpers;
 
 namespace RotatingChores.Models
 {
-    public enum Priority { Low, Medium, High};
-
     public class Chore
     {
         public int ID { get; set; }

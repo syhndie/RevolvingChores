@@ -5,6 +5,8 @@
     ViewData["Title"] = "Create";
 }
 
+@using RotatingChores.Helpers;
+
 <h1>Create</h1>
 
 <h4>Chore</h4>
@@ -33,9 +35,12 @@
                 <input asp-for="NewChoreVM.DateLastCompleted" class="form-control" />
                 <span asp-validation-for="NewChoreVM.DateLastCompleted" class="text-danger"></span>
             </div>
+
+            @*<select asp-for="Fish.FishCatagories" class="form-control" asp-items="@Html.GetEnumSelectList<FishCatagories>()"></select>*@
+
             <div class="form-group">
                 <label asp-for="NewChoreVM.Priority" class="control-label"></label>
-                <input asp-for="NewChoreVM.Priority" class="form-control" />
+                <select asp-for="NewChoreVM.Priority" class="form-control" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
                 <span asp-validation-for="NewChoreVM.Priority" class="text-danger"></span>
             </div>
             <div class="form-group">

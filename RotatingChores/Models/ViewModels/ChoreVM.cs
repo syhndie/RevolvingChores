@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using RotatingChores.Helpers;
 
 namespace RotatingChores.Models.ViewModels
 {
@@ -15,6 +16,7 @@ namespace RotatingChores.Models.ViewModels
 
         public int? DaysToRepeat { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? DateLastCompleted { get; set; }
 
         public Priority? Priority { get; set; }

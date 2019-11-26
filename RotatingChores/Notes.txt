@@ -1,6 +1,13 @@
 ﻿Next steps:
-fix chores/create - model binding and all that confusing stuff
-make Chore UserId property nullable?
+Create chore page:
+	add datatype annotation to datelastcompleted 	
+	add datatables
+	figure out how to display enum in forms
+Edit chore page
+Chore index page
+Chore details page?
+Chore delete page
+
 Adjust Identity:
 	should there be email varification?
 	should there be an admin?

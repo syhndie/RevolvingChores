@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
-using RotatingChores.Data;
 using RotatingChores.Models.ViewModels;
 
 namespace RotatingChores.Pages.NewFolder.Chores
