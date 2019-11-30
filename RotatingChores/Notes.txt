@@ -1,8 +1,6 @@
 ﻿Next steps:
 Create chore page:
-	add datatype annotation to datelastcompleted 	
 	add datatables
-	figure out how to display enum in forms
 Edit chore page
 Chore index page
 Chore details page?

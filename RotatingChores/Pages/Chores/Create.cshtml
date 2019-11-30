@@ -35,12 +35,11 @@
                 <input asp-for="NewChoreVM.DateLastCompleted" class="form-control" />
                 <span asp-validation-for="NewChoreVM.DateLastCompleted" class="text-danger"></span>
             </div>
-
-            @*<select asp-for="Fish.FishCatagories" class="form-control" asp-items="@Html.GetEnumSelectList<FishCatagories>()"></select>*@
-
             <div class="form-group">
                 <label asp-for="NewChoreVM.Priority" class="control-label"></label>
-                <select asp-for="NewChoreVM.Priority" class="form-control" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+                <select asp-for="NewChoreVM.Priority" class="form-control" asp-items="@Html.GetEnumSelectList<Priority>()">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="NewChoreVM.Priority" class="text-danger"></span>
             </div>
             <div class="form-group">
