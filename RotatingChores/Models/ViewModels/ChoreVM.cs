@@ -14,7 +14,7 @@ namespace RotatingChores.Models.ViewModels
 
         public string Description { get; set; }
 
-        public int? DaysToRepeat { get; set; }
+        public decimal? DaysToRepeat { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? DateLastCompleted { get; set; }

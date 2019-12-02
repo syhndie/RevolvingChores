@@ -19,7 +19,7 @@ namespace RotatingChores.Models
 
         public string Description { get; set; }
 
-        public int? DaysToRepeat { get; set; }
+        public decimal? DaysToRepeat { get; set; }
 
         public DateTime? DateLastCompleted { get; set; }
 
