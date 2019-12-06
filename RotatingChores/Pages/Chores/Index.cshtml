@@ -2,26 +2,26 @@
 @model RotatingChores.Pages.NewFolder.Chores.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Chores";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">create new chore</a>
 </p>
-<table class="table">
+<table class="table" id="choreindex">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Chores[0].Name)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Chores[0].Description)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.Chores[0].DaysToRepeat)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Chores[0].DateLastCompleted)
             </th>
@@ -37,12 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.DaysToRepeat)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.DateLastCompleted)
             </td>
@@ -50,11 +50,29 @@
                 @Html.DisplayFor(modelItem => item.Priority)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.ID">edit</a> 
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $('#choreindex').DataTable({
+            "order": [[1, "asc"], [2, "desc"]],
+            "language": {
+                search: "search:"
+            },
+            "paging": false,
+            columns: [
+                { data: "name" },
+                //{ data: "description", "orderable": false},
+                //{ data: "daystorepeat" },
+                { data: "datelastcompleted", type: "date" },
+                { data: "priority" },
+                { data: "links", "orderable": false }
+            ]
+        });
+    </script>
+}
