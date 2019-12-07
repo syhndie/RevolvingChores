@@ -1,5 +1,21 @@
-﻿Next steps:
-	create github repository
-	stage step-by-step changes, and commit each
-	switch database to postgres
-	add secrets file for postgres id, password
+﻿every chore has a date last completed.
+every chore has a field to indicate how frequently the chore should be done
+a due date can be calculated for each chore, based on these two fields
+the index page will be a list of chores
+the primary sort order will be on due date, ascending
+if a chore is overdue, it will be listed in red
+maybe there should be a priority field that can provide a secondary sort order? - low, med, high; or normal, high; or high priority?: yes, no
+or, maybe secondary sort order should be based on frequency - more frequent chores get precendence over less frequent ones - this could be tertiary sort order
+
+the list should be searchable via datatables, but not orderable - because that could be confusing when sort order is so important to the presentation
+
+chore fields
+	id - int, required
+	userid - string, required
+	name - string, required
+	datelast - datetime, datatype=date, required
+	frequencyValue - int (days to repeat), required
+	frequencyUnit - enum (days, weeks, months, quarters, years)
+	duedate - datetime, with a getter that uses datelast, frequencyValue, and frequencyUnit, readonly
+	highPriority - bool, default is false, required
+	description? notes? maybe this would only show on the details and/or edit page?, optional
