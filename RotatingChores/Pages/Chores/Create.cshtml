@@ -2,22 +2,15 @@
 @model RotatingChores.Pages.Chores.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Chore";
 }
 
-<h1>Create</h1>
-
-<h4>Chore</h4>
+<h1>@ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Chore.UserID" class="control-label"></label>
-                <input asp-for="Chore.UserID" class="form-control" />
-                <span asp-validation-for="Chore.UserID" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Chore.Name" class="control-label"></label>
                 <input asp-for="Chore.Name" class="form-control" />
@@ -25,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Chore.DateLastCompleted" class="control-label"></label>
-                <input asp-for="Chore.DateLastCompleted" class="form-control" />
+                <input id="date" type="text" asp-for="Chore.DateLastCompleted" class="form-control" />
                 <span asp-validation-for="Chore.DateLastCompleted" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,4 +54,12 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#date").datepicker({
+                orientation: "bottom"
+            });
+        });
+    </script>
 }
