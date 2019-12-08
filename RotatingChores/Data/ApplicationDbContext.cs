@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RotatingChores.Models;
 
 namespace RotatingChores.Data
 {
@@ -12,5 +13,6 @@ namespace RotatingChores.Data
             : base(options)
         {
         }
+        public DbSet<RotatingChores.Models.Chore> Chores { get; set; }
     }
 }

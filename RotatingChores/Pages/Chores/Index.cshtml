@@ -1,0 +1,72 @@
+﻿@page
+@model RotatingChores.Pages.Chores.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].DateLastCompleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].FrequencyValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].FrequencyUnits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].IsHighPriority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chore[0].Notes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Chore) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateLastCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequencyValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequencyUnits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsHighPriority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

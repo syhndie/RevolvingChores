@@ -1,0 +1,65 @@
+﻿@page
+@model RotatingChores.Pages.Chores.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Chore</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Chore.ID" />
+            <div class="form-group">
+                <label asp-for="Chore.UserID" class="control-label"></label>
+                <input asp-for="Chore.UserID" class="form-control" />
+                <span asp-validation-for="Chore.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chore.Name" class="control-label"></label>
+                <input asp-for="Chore.Name" class="form-control" />
+                <span asp-validation-for="Chore.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chore.DateLastCompleted" class="control-label"></label>
+                <input asp-for="Chore.DateLastCompleted" class="form-control" />
+                <span asp-validation-for="Chore.DateLastCompleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chore.FrequencyValue" class="control-label"></label>
+                <input asp-for="Chore.FrequencyValue" class="form-control" />
+                <span asp-validation-for="Chore.FrequencyValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chore.FrequencyUnits" class="control-label"></label>
+                <select asp-for="Chore.FrequencyUnits" class="form-control"></select>
+                <span asp-validation-for="Chore.FrequencyUnits" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Chore.IsHighPriority" /> @Html.DisplayNameFor(model => model.Chore.IsHighPriority)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chore.Notes" class="control-label"></label>
+                <input asp-for="Chore.Notes" class="form-control" />
+                <span asp-validation-for="Chore.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
