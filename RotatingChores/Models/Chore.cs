@@ -14,20 +14,30 @@ namespace RotatingChores.Models
         [Required]
         public string UserID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required")]        
+        [Display(Name = "Name of chore")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Date is required")]
         [DataType(DataType.Date)]
+        [Display(Name = "Day the chore was last done")]
         public DateTime DateLastCompleted { get; set; }
 
+        [Required(ErrorMessage = "Value is required")]
+        [Range(0, int.MaxValue, ErrorMessage = "Value must be positive")]
+        [Display(Name = "The chore should be done once every:")]
         public int FrequencyValue { get; set; }
 
+        [Required(ErrorMessage = "Units are required")]
+        [Display(Name = "")]
         public TimeIntervals FrequencyUnits { get; set; }
-        
-        //booleans default to false, and that is what we want here
-        public bool IsHighPriority { get; set; }
 
+        [Display(Name = "Notes about the chore")]
         public string Notes { get; set; }
+
+        //booleans default to false, and that is what we want here
+        [Display(Name = "High priority")]
+        public bool IsHighPriority { get; set; }
 
         public DateTime DueDate
         {
