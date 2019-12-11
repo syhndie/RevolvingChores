@@ -14,25 +14,26 @@ namespace RotatingChores.Models
         [Required]
         public string UserID { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]        
+        [Required(ErrorMessage = "name is required")]        
         [Display(Name = "Name of chore")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Date is required")]
+        [Required(ErrorMessage = "date is required")]
         [DataType(DataType.Date)]
-        [Display(Name = "Day the chore was last done")]
+        [Display(Name = "Date the chore was last done")]
         public DateTime DateLastCompleted { get; set; }
 
-        [Required(ErrorMessage = "Value is required")]
-        [Range(0, int.MaxValue, ErrorMessage = "Value must be positive")]
+        [Required(ErrorMessage = "number is required")]
+        [RegularExpression(@"^[1-9]\d*$", ErrorMessage = "This must be a positive integer") ]
+
         [Display(Name = "The chore should be done once every:")]
         public int FrequencyValue { get; set; }
 
-        [Required(ErrorMessage = "Units are required")]
+        [Required(ErrorMessage = "units are required")]
         [Display(Name = "")]
         public TimeIntervals FrequencyUnits { get; set; }
 
-        [Display(Name = "Notes about the chore")]
+        [Display(Name = "notes about the chore")]
         public string Notes { get; set; }
 
         //booleans default to false, and that is what we want here
