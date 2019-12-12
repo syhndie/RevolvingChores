@@ -30,7 +30,6 @@ namespace RotatingChores.Models
         public int FrequencyValue { get; set; }
 
         [Required(ErrorMessage = "units are required")]
-        [Display(Name = "")]
         public TimeIntervals FrequencyUnits { get; set; }
 
         [Display(Name = "notes about the chore")]

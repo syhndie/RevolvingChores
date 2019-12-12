@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HomeSchoolDayBook.Models
+namespace RotatingChores.Models
 {
     public class BasePageModel : PageModel
     {
