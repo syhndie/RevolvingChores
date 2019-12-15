@@ -42,7 +42,10 @@
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
+        @*For now, we will not worry abotu asking for consent to use cookies - it is obnoxious -
+            uncomment this, and change cookie policy if consent is desired*@
+        @*<partial name="_CookieConsentPartial" />*@
+        <partial name="_MessagesPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -75,6 +78,7 @@
 
     <script src="~/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

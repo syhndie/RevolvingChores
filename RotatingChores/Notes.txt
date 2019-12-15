@@ -1,4 +1,7 @@
-﻿every chore has a date last completed.
+﻿to do next
+	authorization policy and exceptions
+
+every chore has a date last completed.
 every chore has a field to indicate how frequently the chore should be done
 a due date can be calculated for each chore, based on these two fields
 the index page will be a list of chores

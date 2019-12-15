@@ -9,7 +9,6 @@ using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
 
-
 namespace RotatingChores.Pages.Chores
 {
     public class CreateModel : BasePageModel
@@ -33,13 +32,13 @@ namespace RotatingChores.Pages.Chores
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Chore = new Chore
+            Chore newChore = new Chore
             {
                 UserID = _userManager.GetUserId(User)
             };
 
             var modelDidUpdate = await TryUpdateModelAsync(
-               this.Chore,
+               newChore,
                "Chore",
                c => c.Name,
                c => c.DateLastCompleted,
@@ -50,8 +49,9 @@ namespace RotatingChores.Pages.Chores
             
             if (modelDidUpdate)
             {
-                _context.Chores.Add(this.Chore);
+                _context.Chores.Add(newChore);
                 await _context.SaveChangesAsync();
+                SuccessMessage = $"'{newChore.Name}' chore successfully added";
                 return RedirectToPage("./Index");
             }
 
