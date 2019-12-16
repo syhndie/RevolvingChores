@@ -15,28 +15,27 @@ namespace RotatingChores.Models
         public string UserID { get; set; }
 
         [Required(ErrorMessage = "name is required")]        
-        [Display(Name = "Name of chore")]
+        [Display(Name = "chore")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "date is required")]
         [DataType(DataType.Date)]
-        [Display(Name = "Date the chore was last done")]
+        [Display(Name = "last completed")]
         public DateTime DateLastCompleted { get; set; }
 
         [Required(ErrorMessage = "number is required")]
-        [RegularExpression(@"^[1-9]\d*$", ErrorMessage = "This must be a positive integer") ]
-
-        [Display(Name = "The chore should be done once every:")]
+        [RegularExpression(@"^[1-9]\d*$", ErrorMessage = "this must be a positive integer") ]
+        [Display(Name = "do once every:")]
         public int FrequencyValue { get; set; }
 
         [Required(ErrorMessage = "units are required")]
         public TimeIntervals FrequencyUnits { get; set; }
 
-        [Display(Name = "notes about the chore")]
+        [Display(Name = "notes")]
         public string Notes { get; set; }
 
         //booleans default to false, and that is what we want here
-        [Display(Name = "High priority")]
+        [Display(Name = "high priority")]
         public bool IsHighPriority { get; set; }
 
         public DateTime DueDate

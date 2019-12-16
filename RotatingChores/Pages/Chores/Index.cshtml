@@ -12,10 +12,7 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Chore[0].UserID)
-            </th>
+        <tr >
             <th>
                 @Html.DisplayNameFor(model => model.Chore[0].Name)
             </th>
@@ -24,9 +21,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Chore[0].FrequencyValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chore[0].FrequencyUnits)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Chore[0].IsHighPriority)
@@ -39,10 +33,13 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Chore) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
+    string textClass = "";
+    if (item.DueDate < DateTime.Today)
+    {
+        textClass = "text-danger";
+    }
+
+        <tr class=@textClass>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -50,9 +47,7 @@
                 @Html.DisplayFor(modelItem => item.DateLastCompleted)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FrequencyValue)
-            </td>
-            <td>
+                @Html.DisplayFor(modelItem => item.FrequencyValue) 
                 @Html.DisplayFor(modelItem => item.FrequencyUnits)
             </td>
             <td>
