@@ -1,7 +1,2 @@
 ﻿chore index page:
-	the index page will be a list of chores
-	the primary sort order will be on due date, ascending
-	secondary sort is on IsHighPriority
-	teritary sort on frequency (more frequent before less frequent)
-	if a chore is overdue, it will be listed in red
 	the list should be searchable, but not orderable

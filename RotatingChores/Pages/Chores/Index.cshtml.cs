@@ -7,23 +7,32 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RotatingChores.Data;
 using RotatingChores.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RotatingChores.Pages.Chores
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly RotatingChores.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userMangaer;
 
-        public IndexModel(RotatingChores.Data.ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+
+        public IList<Chore> Chores { get; set; }
+
+        public IndexModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
+            _userMangaer = userManager;
             _context = context;
         }
 
-        public IList<Chore> Chore { get;set; }
-
         public async Task OnGetAsync()
         {
-            Chore = await _context.Chores.ToListAsync();
+            Chores = await _context.Chores
+                .Where(ch => ch.UserID == _userMangaer.GetUserId(User))
+                .OrderBy(ch => ch.DueDate)
+                .ThenByDescending(ch => ch.IsHighPriority)
+                .ThenBy(ch => ch.Name)
+                .ToListAsync();
         }
     }
 }
