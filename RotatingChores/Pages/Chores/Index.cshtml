@@ -10,57 +10,92 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr >
-            <th>
-                @Html.DisplayNameFor(model => model.Chores[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chores[0].DateLastCompleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chores[0].FrequencyValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chores[0].IsHighPriority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chores[0].Notes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Chores) {
-    string textClass = "";
-    if (item.DueDate < DateTime.Today)
-    {
-        textClass = "text-danger";
-    }
+<form id="input-form">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chores[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chores[0].FrequencyValue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chores[0].IsHighPriority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chores[0].Notes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chores[0].DateLastCompleted)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Chores.Count; i++)
+            {
+                string inputChoreId = $"input-{Model.Chores[i].ID}";
+                string buttonChoreId = $"button-{Model.Chores[i].ID}";
+                
+                string textClass = "";
+                if (Model.Chores[i].DueDate < DateTime.Today)
+                {
+                    textClass = "text-danger";
+                }
+            <tr>
+                <td class=@textClass>
+                    @Html.DisplayFor(model => model.Chores[i].Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Chores[i].FrequencyValue)
+                    @Html.DisplayFor(model => model.Chores[i].FrequencyUnits)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Chores[i].IsHighPriority)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Chores[i].Notes)
+                </td>
+                <td>
+                    <input id=@inputChoreId type="text" class="form-control form-control-sm" asp-for="@Model.Chores[i].DateLastCompleted" />
+                    <span asp-validation-for="@Model.Chores[i].DateLastCompleted" class="text-danger"></span>
+                </td>
+                <td>
+                    <button type="button" id=@buttonChoreId class="update-button">Save New Date</button>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>
+<form id="submit-form" asp-page-handler="update" method="post">
+    <input id="submit-chore-id" type="hidden" asp-for="@Model.ChoreID" />
+    <input id="submit-chore-date" type="hidden" asp-for="@Model.ChoreDate" />
+</form>
 
-        <tr class=@textClass>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateLastCompleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrequencyValue) 
-                @Html.DisplayFor(modelItem => item.FrequencyUnits)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsHighPriority)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+@section Scripts {
+    <script type="text/javascript">
+        function savedate() {
+            var choreid = this.id.split("-")[1];
+            var choreInputid = "input-" + choreid;
+            var newDate = document.getElementById(choreInputid).value;
+            var $submitForm = $($("#submit-form"));
+            $("#submit-chore-id").val(choreid);
+            $("#submit-chore-date").val(newDate);
+            debugger;
+            $submitForm.submit();
+            
+        }
+
+        $(document).ready(function () {
+            $(".update-button").click(savedate)
+        });
+    </script>
+
 }
-    </tbody>
-</table>
