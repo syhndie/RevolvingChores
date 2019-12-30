@@ -59,7 +59,7 @@
                     @Html.DisplayFor(model => model.Chores[i].Notes)
                 </td>
                 <td>
-                    <input id=@inputChoreId type="text" class="form-control form-control-sm" asp-for="@Model.Chores[i].DateLastCompleted" />
+                    <input id=@inputChoreId type="text" class="date-input form-control form-control-sm" asp-for="@Model.Chores[i].DateLastCompleted" />
                     <span asp-validation-for="@Model.Chores[i].DateLastCompleted" class="text-danger"></span>
                 </td>
                 <td>
@@ -88,12 +88,13 @@
             var $submitForm = $($("#submit-form"));
             $("#submit-chore-id").val(choreid);
             $("#submit-chore-date").val(newDate);
-            debugger;
-            $submitForm.submit();
-            
+            $submitForm.submit();            
         }
 
-        $(document).ready(function () {
+        $(document).ready(function () {            
+            $(".date-input").datepicker({
+                todayBtn: "linked"
+            });
             $(".update-button").click(savedate)
         });
     </script>
