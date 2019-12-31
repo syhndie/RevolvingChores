@@ -20,8 +20,10 @@ namespace RotatingChores.Pages.Chores
 
         public IList<Chore> Chores { get; set; }
 
+        [BindProperty]
         public int ChoreID { get; set; }
 
+        [BindProperty]
         [DataType(DataType.Date)]
         public DateTime ChoreDate { get; set; }
 
@@ -46,8 +48,34 @@ namespace RotatingChores.Pages.Chores
         public async Task<IActionResult> OnPostUpdateAsync()
         {
             string userID = _userMangaer.GetUserId(User);
+
+            Chore choreToEdit = await _context.Chores
+                .Where(ch => ch.UserID == userID)
+                .Where(ch => ch.ID == ChoreID)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+
+            try
+            {
+                choreToEdit.DateLastCompleted = ChoreDate;
+            }
+            catch
+            {
+                if (choreToEdit is null)
+                {
+                    DangerMessage = "The chore you tried to update has been deleted.";
+                    return RedirectToPage();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            _context.Attach(choreToEdit).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
            
-            return Page();
+            return RedirectToPage();
         }
     }
 }

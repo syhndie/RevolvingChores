@@ -1,2 +1,3 @@
-﻿chore index page:
-	the list should be searchable, but not orderable
+﻿Next:
+	chore index pagemodel - make chore date edit work
+	chore edit page
