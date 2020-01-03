@@ -39,7 +39,7 @@ namespace RotatingChores.Pages.Chores
 
             var modelDidUpdate = await TryUpdateModelAsync(
                newChore,
-               "Chore",
+               "",
                c => c.Name,
                c => c.DateLastCompleted,
                c => c.FrequencyValue,
