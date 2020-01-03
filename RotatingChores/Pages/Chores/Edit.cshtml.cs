@@ -8,20 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RotatingChores.Data;
 using RotatingChores.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RotatingChores.Pages.Chores
 {
-    public class EditModel : PageModel
+    public class EditModel : BasePageModel
     {
-        private readonly RotatingChores.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EditModel(RotatingChores.Data.ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+
+        public Chore Chore { get; set; }
+
+        [BindProperty]
+        public int ChoreID { get; set; }
+
+        public EditModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
-        [BindProperty]
-        public Chore Chore { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,46 +37,55 @@ namespace RotatingChores.Pages.Chores
                 return NotFound();
             }
 
-            Chore = await _context.Chores.FirstOrDefaultAsync(m => m.ID == id);
+            Chore = await _context.Chores
+                .Where(ch => ch.UserID == _userManager.GetUserId(User))
+                .SingleOrDefaultAsync(ch => ch.ID == id);
 
             if (Chore == null)
             {
-                return NotFound();
+                DangerMessage = "The chore you tried to update has been deleted.";
+                return RedirectToPage("./Index");
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Chore).State = EntityState.Modified;
+            Chore choreToEdit = await _context.Chores
+                .Where(ch => ch.UserID == _userManager.GetUserId(User))
+                .SingleOrDefaultAsync(ch => ch.ID == id);
 
-            try
+            if (choreToEdit is null)
             {
+                DangerMessage = "The chore you tried to update has been deleted.";
+                return RedirectToPage("./Index");
+            }
+
+            var modelDidUpdate = await TryUpdateModelAsync(
+                choreToEdit,
+                "",
+                c => c.Name,
+                c => c.DateLastCompleted,
+                c => c.FrequencyValue,
+                c => c.FrequencyUnits,
+                c => c.Notes,
+                c => c.IsHighPriority);
+
+            if (modelDidUpdate)
+            {
+                _context.Attach(choreToEdit).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ChoreExists(Chore.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                SuccessMessage = $"'{choreToEdit.Name}' chore successfully updated.";
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool ChoreExists(int id)
-        {
-            return _context.Chores.Any(e => e.ID == id);
+            DangerMessage = "Chore did not update successfully.";
+            return RedirectToPage();
         }
     }
 }
