@@ -1,3 +1,2 @@
 ﻿Next:
-	chore edit submit button text
 	single day, week, month, year display
