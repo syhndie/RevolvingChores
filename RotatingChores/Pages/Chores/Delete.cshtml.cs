@@ -7,15 +7,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RotatingChores.Data;
 using RotatingChores.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RotatingChores.Pages.Chores
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BasePageModel
     {
-        private readonly RotatingChores.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(RotatingChores.Data.ApplicationDbContext context)
+        public DeleteModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -29,10 +32,13 @@ namespace RotatingChores.Pages.Chores
                 return NotFound();
             }
 
-            Chore = await _context.Chores.FirstOrDefaultAsync(m => m.ID == id);
+            Chore = await _context.Chores
+                .Where(c => c.UserID == _userManager.GetUserId(User))
+                .SingleOrDefaultAsync(m => m.ID == id);
 
             if (Chore == null)
             {
+                DangerMessage = "";
                 return NotFound();
             }
             return Page();
