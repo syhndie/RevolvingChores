@@ -1,2 +1,15 @@
 ﻿Next:
 	single day, week, month, year display
+	high priority display on chores index page
+	capitalization on all pages
+	improve overall look
+	forgot password email send
+	external authentication
+	user profile
+	two factor authentication
+	personal data/ data download - remove
+	delete account
+	navbar - what should be there when ?
+	design for phone screens
+		remove all unecessary columns from index table
+		maybe show that info on hover?
