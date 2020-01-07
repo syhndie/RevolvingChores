@@ -53,7 +53,10 @@
                     @Html.DisplayFor(model => model.Chores[i].FrequencyUnits)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Chores[i].IsHighPriority)
+                    @if (Model.Chores[i].IsHighPriority)
+                    {
+                        <i class="fas fa-check" style="color:cadetblue"></i>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Chores[i].Notes)
