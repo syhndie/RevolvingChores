@@ -14,9 +14,9 @@
     <table class="table col-xl-4 col-lg-6 col-sm-8 col-12">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th style="width: 10%"></th>
+                <th style="width: 57%"></th>
+                <th style="width: 43%"></th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +36,11 @@
                 </td>
                 <td class=@textClass>
                     <p>
-                        @Html.DisplayFor(model => model.Chores[i].Name) 
+                        @Html.DisplayFor(model => model.Chores[i].Name) &nbsp; 
+                        @if (Model.Chores[i].IsHighPriority)
+                            {
+                                <i class="fas fa-exclamation"></i>
+                            }
                         <br />
                         Due 
                         @Html.DisplayFor(model => model.Chores[i].DueDate)

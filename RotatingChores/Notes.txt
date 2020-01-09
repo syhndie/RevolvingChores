@@ -1,8 +1,15 @@
 ﻿Next:
-	single day, week, month, year display
 	high priority display on chores index page
 	capitalization on all pages
 	improve overall look
+		table and forms wider on wider screens - with navbar same width
+		fix padding issues on small screens
+		forms on phone screens more finger friendly
+		change names of links on navbar
+		colors?
+		alt titles for buttons/links
+	index page - description and instructions
+
 	forgot password email send
 	external authentication
 	user profile
