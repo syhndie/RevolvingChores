@@ -11,24 +11,10 @@
     <a asp-page="Create">Create New</a>
 </p>
 <form id="input-form">
-    <table class="table">
+    <table class="table col-xl-4 col-lg-6 col-sm-8 col-12">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chores[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chores[0].FrequencyValue)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chores[0].IsHighPriority)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chores[0].Notes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chores[0].DateLastCompleted)
-                </th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -45,32 +31,22 @@
                     textClass = "text-danger";
                 }
             <tr>
+                <td>
+                    <button type="button" id=@buttonChoreId class="update-to-today"><i class="far fa-calendar-check fa-2x"></i></button>
+                </td>
                 <td class=@textClass>
-                    @Html.DisplayFor(model => model.Chores[i].Name)
+                    <p>
+                        @Html.DisplayFor(model => model.Chores[i].Name) 
+                        <br />
+                        Due 
+                        @Html.DisplayFor(model => model.Chores[i].DueDate)
+                    </p>
+
                 </td>
+
                 <td>
-                    @Html.DisplayFor(model => model.Chores[i].FrequencyValue)
-                    @Html.DisplayFor(model => model.Chores[i].FrequencyUnits)
-                </td>
-                <td>
-                    @if (Model.Chores[i].IsHighPriority)
-                    {
-                        <i class="fas fa-check" style="color:cadetblue"></i>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Chores[i].Notes)
-                </td>
-                <td>
-                    <input id=@inputChoreId type="text" class="date-input form-control form-control-sm" asp-for="@Model.Chores[i].DateLastCompleted" />
-                    <span asp-validation-for="@Model.Chores[i].DateLastCompleted" class="text-danger"></span>
-                </td>
-                <td>
-                    <button type="button" id=@buttonChoreId class="update-button">Save New Date</button>
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID">Edit</a> |
-                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID"><i class="fas fa-edit fa-2x"></i></a> &nbsp;
+                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID"><i class="far fa-trash-alt fa-2x"></i></a>
                 </td>
             </tr>
             }
@@ -79,26 +55,19 @@
 </form>
 <form id="submit-form" asp-page-handler="update" method="post">
     <input id="submit-chore-id" type="hidden" asp-for="@Model.ChoreID" />
-    <input id="submit-chore-date" type="hidden" asp-for="@Model.ChoreDate" />
 </form>
 
 @section Scripts {
     <script type="text/javascript">
         function savedate() {
             var choreid = this.id.split("-")[1];
-            var choreInputid = "input-" + choreid;
-            var newDate = document.getElementById(choreInputid).value;
             var $submitForm = $($("#submit-form"));
             $("#submit-chore-id").val(choreid);
-            $("#submit-chore-date").val(newDate);
             $submitForm.submit();            
         }
 
         $(document).ready(function () {            
-            $(".date-input").datepicker({
-                todayBtn: "linked"
-            });
-            $(".update-button").click(savedate)
+            $(".update-to-today").click(savedate)
         });
     </script>
 

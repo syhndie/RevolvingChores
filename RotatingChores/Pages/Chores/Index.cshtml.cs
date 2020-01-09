@@ -23,9 +23,9 @@ namespace RotatingChores.Pages.Chores
         [BindProperty]
         public int ChoreID { get; set; }
 
-        [BindProperty]
-        [DataType(DataType.Date)]
-        public DateTime ChoreDate { get; set; }
+        //[BindProperty]
+        //[DataType(DataType.Date)]
+        //public DateTime ChoreDate { get; set; }
 
         public IndexModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
@@ -57,7 +57,7 @@ namespace RotatingChores.Pages.Chores
 
             try
             {
-                choreToEdit.DateLastCompleted = ChoreDate;
+                choreToEdit.DateLastCompleted = DateTime.Today;
             }
             catch
             {
@@ -74,6 +74,8 @@ namespace RotatingChores.Pages.Chores
 
             _context.Attach(choreToEdit).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            SuccessMessage = $"'{choreToEdit.Name}' chore Date Last Completed updated to today.";
            
             return RedirectToPage();
         }
