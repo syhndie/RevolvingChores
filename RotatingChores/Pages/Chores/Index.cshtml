@@ -5,33 +5,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>MyChores</h1>
+<h2>All Chores</h2>
 
 <p>
     <a asp-page="Create">Create new</a>
 </p>
 <form id="input-form">
-    <table class="table col-xl-4 col-lg-6 col-sm-8 col-12">
-        <thead>
-            <tr>
-                <th style="width: 10%"></th>
-                <th style="width: 57%"></th>
-                <th style="width: 43%"></th>
-            </tr>
-        </thead>
+    <table class="table">
         <tbody>
             @for (int i = 0; i < Model.Chores.Count; i++)
             {
                 string inputChoreId = $"input-{Model.Chores[i].ID}";
                 string buttonChoreId = $"button-{Model.Chores[i].ID}";
                 
-                string textClass = "";
+                string textClass = "name-column";
                 if (Model.Chores[i].DueDate < DateTime.Today)
                 {
-                    textClass = "text-danger";
+                    textClass = "text-danger name-column";
                 }
             <tr>
-                <td>
+                <td class="button-column pl-0 pr-0">
                     <button type="button" id=@buttonChoreId class="update-to-today"><i class="far fa-calendar-check fa-2x"></i></button>
                 </td>
                 <td class=@textClass>
@@ -47,8 +40,7 @@
                     </p>
 
                 </td>
-
-                <td>
+                <td class="icon-column pl-0 pr-0">
                     <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID"><i class="fas fa-edit fa-2x"></i></a> &nbsp;
                     <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID"><i class="far fa-trash-alt fa-2x"></i></a>
                 </td>

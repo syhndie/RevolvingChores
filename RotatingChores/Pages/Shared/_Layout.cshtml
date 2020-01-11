@@ -21,8 +21,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3 p-0">
+            <div class="container m-0 border-bottom">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">RotatingChores</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Chores/Index">MyChores</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Chores/Index">All Chores</a>
                         </li>
                         @*For now, we will not worry about the privacy policy
                         uncomment this, and write a privacy policy if desired*@
@@ -44,7 +44,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container m-0">
         @*For now, we will not worry abotu asking for consent to use cookies - it is obnoxious -
             uncomment this, and change cookie policy if consent is desired*@
         @*<partial name="_CookieConsentPartial" />*@
@@ -54,8 +54,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="footer text-muted">
+        <div class="container m-0 border-top">
             &copy; 2019 - RotatingChores - <a asp-area="" asp-page="/Contact">Contact Us</a>
         </div>
     </footer>

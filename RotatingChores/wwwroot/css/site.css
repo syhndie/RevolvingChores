@@ -3,12 +3,33 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 /*cindy's css*/
-@media (max-width: 400px) {
-    .container {
-        padding-right: 0;
-        padding-left: 0;
+.container {
+    max-width: 600px;
+}
+.button-column {
+    width: 3rem;
+    text-align: left;
+}
+.name-column {
+    
+    text-align: left;
+}
+.icon-column {
+    width: 5rem;
+    text-align: right;
+}
+/*@media (min-width: 992px ) {
+    .name-column{
+        width: 75%;
+    }
+    .icon-column {
+        width: 15%;
     }
 }
+@media (max-width: 400px) {
+    .container {
+    }
+}*/
 /**/
 a.navbar-brand {
   white-space: normal;

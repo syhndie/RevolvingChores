@@ -2,15 +2,14 @@
 @model RotatingChores.Pages.Chores.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete Chore";
+    ViewData["Title"] = "Delete";
 }
 
 
-<h1>@ViewData["Title"]</h1>
+<h2>Delete Chore</h2>
 <hr />
-<hr />
-<div class="row">
-    <div id="form-container" class="col-xl-4 col-lg-6 col-sm-8 col-12">
+<div class="row m-0">
+    <div class="col-12 p-0">
         <form method="post">
             <div class="form-group">
                 <label class="control-label">Are you sure you want to delete '@Model.Chore.Name' chore?</label>
@@ -22,7 +21,6 @@
         </form>
     </div>
 </div>
-<hr />
 <hr />
 <div>
     <a asp-page="Index">Back to list</a>
