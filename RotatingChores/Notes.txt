@@ -1,15 +1,10 @@
 ﻿Next:
 	improve overall look
-		table and forms wider on wider screens - with navbar same width
-		fix padding issues on small screens
-		forms on phone screens more finger friendly
 		center some stuff
-		change names of links on navbar
 		colors?
 		alt titles for buttons/links
 		on myaccount page, the navbar is all funky and the whole thing has margins
 	index page - description and instructions
-	on delete chore page, more space between delete and back to list
 
 	forgot password email send
 	external authentication
