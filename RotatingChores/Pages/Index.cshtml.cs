@@ -11,25 +11,25 @@ namespace RotatingChores.Pages
 {
     public class IndexModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userMangaer;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        //private readonly UserManager<IdentityUser> _userMangaer;
+        //private readonly SignInManager<IdentityUser> _signInManager;
 
-        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userMangaer = userManager;
-            _signInManager = signInManager;
-        }
+        //public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        //{
+        //    _userMangaer = userManager;
+        //    _signInManager = signInManager;
+        //}
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                return RedirectToPage("./Chores/Index");
-            }
-            else
-            {
-                return Page();
-            }
+            //if (_signInManager.IsSignedIn(User))
+            //{
+            //    return RedirectToPage("./Chores/Index");
+            //}
+            //else
+            //{
+            return Page();
+            //}
 
         }
     }
