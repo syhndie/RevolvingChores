@@ -1,9 +1,8 @@
 ﻿Next:
 	improve overall look
-		center some stuff
-		colors?
 		alt titles for buttons/links
 		on myaccount page, the navbar is all funky and the whole thing has margins
+		also login page
 	index page - description and instructions
 
 	forgot password email send
