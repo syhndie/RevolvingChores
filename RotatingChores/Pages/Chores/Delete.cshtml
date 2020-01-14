@@ -5,22 +5,22 @@
     ViewData["Title"] = "Delete";
 }
 
-
-<h2>Delete Chore</h2>
-<div>
+<div class="text-center">
+    <h2>Delete Chore</h2>
     <a asp-page="Index">All Chores</a>
-</div>
-<hr />
-<div class="row m-0">
-    <div class="col-12 p-0">
-        <form method="post">
-            <div class="form-group">
-                <label class="control-label">Are you sure you want to delete '@Model.Chore.Name' chore?</label>
-            </div>
-            <div class="form-group">
-                <input type="hidden" asp-for="Chore.ID" />
-                <input type="submit" value="Delete" class="btn btn-danger" /> 
-            </div>
-        </form>
+
+    <hr />
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <form method="post">
+                <div class="form-group">
+                    <label class="control-label">Are you sure you want to delete '@Model.Chore.Name' chore?</label>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="Chore.ID" />
+                    <input type="submit" value="Delete" class="btn btn-danger btn-block" /> 
+                </div>
+            </form>
+        </div>
     </div>
 </div>
