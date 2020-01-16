@@ -4,14 +4,17 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
-<h1>@ViewData["Title"]</h1>
+<div class="text-center pb-4">
+    <h2>Log in</h2>
+</div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <section>
-            <form id="account" method="post">
+            <div class="text-center">
                 <h4>Use a local account to log in.</h4>
                 <hr />
+            </div>
+            <form id="account" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Input.Email"></label>
@@ -24,28 +27,31 @@
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
+                    <label asp-for="Input.RememberMe" class="control-label"></label><br />
+                    <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" asp-for="Input.RememberMe" class="form-control" />
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
+
+                @*<div class="form-group col-6">
+                <label asp-for="IsHighPriority" class="control-label"></label><br />
+                <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" asp-for="IsHighPriority" class="form-control" />
+                <span asp-validation-for="IsHighPriority" class="text-danger"></span>
+                </div>*@
+
+                <div class="form-group pt-4 pb-4">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
                 </div>
             </form>
+            <div class="text-center pb-4">
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </p>
+                <p>
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </p>
+            </div>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6">
         <section>
             <h4>Use another service to log in.</h4>
             <hr />
