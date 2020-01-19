@@ -5,8 +5,10 @@
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
-<partial name="_StatusMessage" for="StatusMessage" />
-<h4>Two-factor authentication </h4>
+<div class="text-center">
+    <partial name="_StatusMessage" for="StatusMessage" />
+    <h4>Two-factor authentication </h4>
+</div>
 @if (Model.Is2faEnabled)
 {
     if (Model.RecoveryCodesLeft == 0)
@@ -40,13 +42,13 @@
     <a asp-page="./Disable2fa" class="btn btn-primary">Disable 2FA</a>
     <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
 }
+<div class="text-center pt-4">
+    <h5>Authenticator app</h5>
+</div>
 
-<h5>Authenticator app</h5>
 @if (!Model.HasAuthenticator)
 {    
-    <div class="pt-4">
-        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary btn-block">Add authenticator app</a>
-    </div>
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary btn-block">Add authenticator app</a>
 }
 else
 {
