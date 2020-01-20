@@ -8,16 +8,16 @@ using Microsoft.Extensions.Logging;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
-    public class DeletePersonalDataModel : PageModel
+    public class DeleteAccountModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ILogger<DeleteAccountModel> _logger;
 
-        public DeletePersonalDataModel(
+        public DeleteAccountModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeleteAccountModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -34,8 +34,6 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             public string Password { get; set; }
         }
 
-        public bool RequirePassword { get; set; }
-
         public async Task<IActionResult> OnGet()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -43,8 +41,6 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            RequirePassword = await _userManager.HasPasswordAsync(user);
             return Page();
         }
 
@@ -56,14 +52,10 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            RequirePassword = await _userManager.HasPasswordAsync(user);
-            if (RequirePassword)
+            if (!await _userManager.CheckPasswordAsync(user, Input.Password))
             {
-                if (!await _userManager.CheckPasswordAsync(user, Input.Password))
-                {
-                    ModelState.AddModelError(string.Empty, "Password not correct.");
-                    return Page();
-                }
+                ModelState.AddModelError(string.Empty, "Password not correct.");
+                return Page();
             }
 
             var result = await _userManager.DeleteAsync(user);
