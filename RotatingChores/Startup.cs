@@ -14,6 +14,9 @@ using RotatingChores.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using RotatingChores.Services;
 
 namespace RotatingChores
 {
@@ -61,7 +64,22 @@ namespace RotatingChores
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
             });
+
+            string emailPassword = Configuration["EmailSender:Password"].Replace("emailPassword", Secrets.emailPassword);
+            string emailUserName = Configuration["EmailSender:UserName"].Replace("emailUserName", Secrets.emailUserName);
+
+            services.AddTransient<IEmailSender, EmailSender>(i =>
+               new EmailSender(
+                   Configuration["EmailSender:Host"],
+                   Configuration.GetValue<int>("EmailSender:Port"),
+                   Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                   emailUserName,
+                   emailPassword
+                   ));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc().AddRazorPagesOptions(options => { options.Conventions.AuthorizeFolder("/Chores"); });
