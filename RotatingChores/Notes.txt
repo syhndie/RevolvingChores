@@ -1,7 +1,7 @@
 ﻿Next:
 	alt titles for buttons/links
 	index page - description and instructions
-
+	move most of the code for centering to the layout
 	forgot password email send
 	external authentication
 	user profile
