@@ -1,0 +1,28 @@
+﻿@page
+@model RotatingChores.Areas.Identity.Pages.Account.ResendVerificationModel
+@{
+    ViewData["Title"] = "Verify Email Address";
+}
+
+<div class="text-center">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <div class="alert alert-info">
+        <p>
+            If the email address entered is associated with an unverified account, a new verification email message will be sent.
+            Click on the link in the email message to verify your account.
+        </p>
+    </div>
+    <hr />
+</div>
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.Email"></label>
+        <input asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>
+
+
