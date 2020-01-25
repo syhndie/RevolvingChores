@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RotatingChores.Models;
 
 namespace RotatingChores.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ConfirmEmailModel : PageModel
+    public class ConfirmEmailModel : BasePageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -38,7 +39,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
             }
 
-            return Page();
+            SuccessMessage = "Thank you for verifying your email address.";
+            return RedirectToPage("./Login");
         }
     }
 }

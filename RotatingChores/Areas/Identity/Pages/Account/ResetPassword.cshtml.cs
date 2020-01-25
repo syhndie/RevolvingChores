@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RotatingChores.Models;
 
 namespace RotatingChores.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ResetPasswordModel : PageModel
+    public class ResetPasswordModel : BasePageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -75,7 +76,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                SuccessMessage = "Your password has been reset.";
+                return RedirectToPage("./Login");
             }
 
             foreach (var error in result.Errors)
