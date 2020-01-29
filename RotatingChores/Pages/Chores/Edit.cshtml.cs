@@ -9,12 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Pages.Chores
 {
     public class EditModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
 
         private readonly ApplicationDbContext _context;
 
@@ -23,7 +24,7 @@ namespace RotatingChores.Pages.Chores
         [BindProperty]
         public int ChoreID { get; set; }
 
-        public EditModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public EditModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -38,7 +39,7 @@ namespace RotatingChores.Pages.Chores
             }
 
             Chore = await _context.Chores
-                .Where(ch => ch.UserID == _userManager.GetUserId(User))
+                .Where(ch => ch.RotatingChoresUserID == _userManager.GetUserId(User))
                 .SingleOrDefaultAsync(ch => ch.ID == id);
 
             if (Chore == null)
@@ -57,7 +58,7 @@ namespace RotatingChores.Pages.Chores
             }
 
             Chore choreToEdit = await _context.Chores
-                .Where(ch => ch.UserID == _userManager.GetUserId(User))
+                .Where(ch => ch.RotatingChoresUserID == _userManager.GetUserId(User))
                 .SingleOrDefaultAsync(ch => ch.ID == id);
 
             if (choreToEdit is null)

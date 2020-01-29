@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RotatingChores.Models;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ConfirmEmailModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<RotatingChoresUser> userManager)
         {
             _userManager = userManager;
         }

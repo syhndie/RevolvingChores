@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
+        private readonly SignInManager<RotatingChoresUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<RotatingChoresUser> userManager,
+            SignInManager<RotatingChoresUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

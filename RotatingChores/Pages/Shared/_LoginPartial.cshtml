@@ -1,6 +1,8 @@
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using RotatingChores.Areas.Identity.Data;
+
+@inject SignInManager<RotatingChoresUser> SignInManager
+@inject UserManager<RotatingChoresUser> UserManager
 
 <ul class="navbar-nav pl-3">
 @if (SignInManager.IsSignedIn(User))

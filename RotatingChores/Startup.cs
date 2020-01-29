@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using RotatingChores.Services;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores
 {
@@ -53,7 +54,7 @@ namespace RotatingChores
                 options.UseNpgsql(connectionString);
             });
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<RotatingChoresUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

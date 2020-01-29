@@ -10,16 +10,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Text.Encodings.Web;
 using RotatingChores.Models;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ResendVerificationModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendVerificationModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ResendVerificationModel(UserManager<RotatingChoresUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

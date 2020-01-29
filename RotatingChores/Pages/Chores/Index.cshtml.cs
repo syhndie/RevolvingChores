@@ -9,12 +9,13 @@ using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Pages.Chores
 {
     public class IndexModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userMangaer;
+        private readonly UserManager<RotatingChoresUser> _userMangaer;
 
         private readonly ApplicationDbContext _context;
 
@@ -27,7 +28,7 @@ namespace RotatingChores.Pages.Chores
         //[DataType(DataType.Date)]
         //public DateTime ChoreDate { get; set; }
 
-        public IndexModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public IndexModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userMangaer = userManager;
             _context = context;
@@ -36,7 +37,7 @@ namespace RotatingChores.Pages.Chores
         public async Task<IActionResult> OnGetAsync()
         {
             Chores = await _context.Chores
-                .Where(ch => ch.UserID == _userMangaer.GetUserId(User))
+                .Where(ch => ch.RotatingChoresUserID == _userMangaer.GetUserId(User))
                 .OrderBy(ch => ch.DueDate)
                 .ThenByDescending(ch => ch.IsHighPriority)
                 .ThenBy(ch => ch.Name)
@@ -50,7 +51,7 @@ namespace RotatingChores.Pages.Chores
             string userID = _userMangaer.GetUserId(User);
 
             Chore choreToEdit = await _context.Chores
-                .Where(ch => ch.UserID == userID)
+                .Where(ch => ch.RotatingChoresUserID == userID)
                 .Where(ch => ch.ID == ChoreID)
                 .AsNoTracking()
                 .SingleOrDefaultAsync();

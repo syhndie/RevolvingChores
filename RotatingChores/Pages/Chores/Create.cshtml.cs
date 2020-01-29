@@ -8,18 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Pages.Chores
 {
     public class CreateModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
 
         private readonly ApplicationDbContext _context;
 
         public Chore Chore { get; set; }
 
-        public CreateModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public CreateModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -34,7 +35,7 @@ namespace RotatingChores.Pages.Chores
         {
             Chore newChore = new Chore
             {
-                UserID = _userManager.GetUserId(User)
+                RotatingChoresUserID = _userManager.GetUserId(User)
             };
 
             var modelDidUpdate = await TryUpdateModelAsync(

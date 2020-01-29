@@ -7,17 +7,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using RotatingChores.Areas.Identity.Data;
+
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
+        private readonly SignInManager<RotatingChoresUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<RotatingChoresUser> userManager,
+            SignInManager<RotatingChoresUser> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

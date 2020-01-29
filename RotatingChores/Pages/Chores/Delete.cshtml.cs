@@ -8,15 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
+using RotatingChores.Areas.Identity.Data;
 
 namespace RotatingChores.Pages.Chores
 {
     public class DeleteModel : BasePageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public DeleteModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public DeleteModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -33,7 +34,7 @@ namespace RotatingChores.Pages.Chores
             }
 
             Chore = await _context.Chores
-                .Where(c => c.UserID == _userManager.GetUserId(User))
+                .Where(c => c.RotatingChoresUserID == _userManager.GetUserId(User))
                 .SingleOrDefaultAsync(m => m.ID == id);
 
             if (Chore == null)
