@@ -10,6 +10,8 @@ namespace RotatingChores.Areas.Identity.Data
 {
     public class RotatingChoresUser : IdentityUser
     {
+        public string PendingEmail { get; set; }
+
         public ICollection<Chore> Chores { get; set; }
     }
 }
