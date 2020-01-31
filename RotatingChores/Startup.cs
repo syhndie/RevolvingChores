@@ -67,11 +67,7 @@ namespace RotatingChores
                 options.Password.RequireUppercase = false;
 
                 options.SignIn.RequireConfirmedEmail = true;
-
-                //this is set to false to avoid two error messages if the user tries to register with a duplicate email address
-                //this only works because the username is automatically set to the email address, and that must be unique
-                //if this ever changes, this setting should be set to true
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
             });
 
             string emailPassword = Configuration["EmailSender:Password"].Replace("emailPassword", Secrets.emailPassword);
