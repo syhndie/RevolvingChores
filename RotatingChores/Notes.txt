@@ -1,7 +1,13 @@
 ﻿Next:
-	deleted user when still logged in gets wonky - need to fix it so that the user gets logged out when the user no longer exists
-		the user can still create chores, etc. but account management pages give an useful error message (they do not throw an exception)
-	change email page changes email but not username - then login asks for email, but really is using username 
+
+Test change email everything!
+
+	change email page changes email but not username -
+		need to use a pending email address until new email is confirmed
+		
+		so, make login ask for email instead of username 
+		deal with email duplicates, both on registration and on changing email
+		always set usermane to be the same as email
 		also, no success or dangermessage when changing email address
 		also, changing email address should cause an email confirmation to go out - send verification email link on this page doesn't work
 	alt titles for buttons/links

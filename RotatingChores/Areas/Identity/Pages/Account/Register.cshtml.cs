@@ -83,7 +83,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account
 
                     SuccessMessage = "An email has been sent to the address you provided. " +
                         "Please click on the link in that email to verify your address. " +
-                        "Once your address has been verified, you may login";
+                        "Once your address has been verified, you may login.";
 
                     return RedirectToPage("./Login");
                 }
