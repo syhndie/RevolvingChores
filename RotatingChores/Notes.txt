@@ -1,19 +1,6 @@
 ﻿Next:
-
-Test change email everything!
-
-	change email page changes email but not username -
-		need to use a pending email address until new email is confirmed
-		
-		so, make login ask for email instead of username 
-		deal with email duplicates, both on registration and on changing email
-		always set usermane to be the same as email
-		also, no success or dangermessage when changing email address
-		also, changing email address should cause an email confirmation to go out - send verification email link on this page doesn't work
 	alt titles for buttons/links
 	index page - description and instructions
-	move most of the code for centering to the layout
 	external authentication
 	two factor authentication
-	personal data/ data download - remove
-	delete account
+	check for pages not centered/styled properly

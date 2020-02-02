@@ -28,14 +28,14 @@
                 }
             <tr>
                 <td class="button-column pl-0 pr-0">
-                    <button type="button" id=@buttonChoreId class="update-to-today"><i class="far fa-calendar-check fa-2x"></i></button>
+                    <button type="button" id=@buttonChoreId class="update-to-today" title="Click to set date last completed to today for this chore"><i class="far fa-calendar-check fa-2x"></i></button>
                 </td>
                 <td class=@textClass>
                     <p>
                         @Html.DisplayFor(model => model.Chores[i].Name) &nbsp; 
                         @if (Model.Chores[i].IsHighPriority)
-                            {
-                                <i class="fas fa-exclamation"></i>
+                            { 
+                                <i title="This chore has a high priority" class="fas fa-exclamation"></i>
                             }
                         <br />
                         Due 
@@ -44,8 +44,8 @@
 
                 </td>
                 <td class="icon-column pl-0 pr-0">
-                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID"><i class="fas fa-edit fa-2x"></i></a> &nbsp;
-                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID"><i class="far fa-trash-alt fa-2x"></i></a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID" title="Click to edit this chore"><i class="fas fa-edit fa-2x"></i></a> &nbsp;
+                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID" title="Click to delete this chore"><i class="far fa-trash-alt fa-2x"></i></a>
                 </td>
             </tr>
             }
