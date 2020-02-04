@@ -1,28 +1,28 @@
 ﻿@{
     if (!String.IsNullOrEmpty((string)TempData["SuccessMessage"]))
     {
-        <div class="alert alert-success">
+        <div class="alert alert-success" role="alert">
             <p>@TempData["SuccessMessage"]</p>
         </div>
     }
 
     if (!String.IsNullOrEmpty((string)TempData["InfoMessage"]))
     {
-        <div class="alert alert-info">
+        <div class="alert alert-info" role="alert">
             <p>@TempData["InfoMessage"]</p>
         </div>
     }
 
     if (!String.IsNullOrEmpty((string)TempData["DangerMessage"]))
     {
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" role="alert">
             <p>@TempData["DangerMessage"]</p>
         </div>
     }
 
     if (!String.IsNullOrEmpty((string)TempData["WarningMessage"]))
     {
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" role="alert">
             <p>@TempData["WarningMessage"]</p>
         </div>
     }
