@@ -1,4 +1,5 @@
 ﻿Next:
+	tooltips for icons for phone
 	alt titles for buttons/links
 	index page - description and instructions
 	external authentication
