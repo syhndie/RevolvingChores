@@ -20,10 +20,10 @@
             {
                 string inputChoreId = $"input-{Model.Chores[i].ID}";
                 string buttonChoreId = $"button-{Model.Chores[i].ID}";
-                string todayBtnTitle = $"Set date last completed to today for {Model.Chores[i].Name} chore";
-                string editBtnTitle = $"Edit the {Model.Chores[i].Name} chore";
-                string deleteBtnTitle = $"Delete the {Model.Chores[i].Name} chore";
-                string highPriorityTitle = $"The {Model.Chores[i].Name} chore has a high priority";
+                string todayBtnTitle = $"Set date last completed to today for {Model.Chores[i].Name}";
+                string editBtnTitle = $"Edit {Model.Chores[i].Name}";
+                string deleteBtnTitle = $"Delete {Model.Chores[i].Name}";
+                string highPriorityTitle = $"{Model.Chores[i].Name} is high priority";
 
                 string textClass = "name-column";
                 if (Model.Chores[i].DueDate < DateTime.Today)
@@ -32,14 +32,15 @@
                 }
             <tr>
                 <td class="button-column pl-0 pr-0">
-                    <button type="button" id=@buttonChoreId class="update-to-today" title="@todayBtnTitle"><i class="far fa-calendar-check fa-2x"></i></button>
+                    <button type="button" id=@buttonChoreId class="update-to-today" title="@todayBtnTitle" aria-label="@todayBtnTitle"><i aria-hidden="true" class="far fa-calendar-check fa-2x"></i></button>
                 </td>
                 <td class=@textClass>
                     <p>
-                        @Html.DisplayFor(model => model.Chores[i].Name) &nbsp; 
+                        @Html.DisplayFor(model => model.Chores[i].Name)  
                         @if (Model.Chores[i].IsHighPriority)
                             { 
-                                <i title="@highPriorityTitle" class="fas fa-exclamation"></i>
+                                <i aria-hidden="true" title="@highPriorityTitle" class="fas fa-exclamation"></i>
+                                <span class="sr-only">@highPriorityTitle</span>
                             }
                         <br />
                         Due 
@@ -48,8 +49,8 @@
 
                 </td>
                 <td class="icon-column pl-0 pr-0">
-                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID" title="@editBtnTitle"><i class="fas fa-edit fa-2x"></i></a> &nbsp;
-                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID" title="@deleteBtnTitle"><i class="far fa-trash-alt fa-2x"></i></a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Chores[i].ID" title="@editBtnTitle" aria-label="@editBtnTitle"><i aria-hidden="true" class="fas fa-edit fa-2x"></i></a> &nbsp;
+                    <a asp-page="./Delete" asp-route-id="@Model.Chores[i].ID" title="@deleteBtnTitle" aria-label="@deleteBtnTitle"><i aria-hidden="true" class="far fa-trash-alt fa-2x"></i></a>
                 </td>
             </tr>
             }

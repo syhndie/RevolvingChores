@@ -5,3 +5,5 @@
 	external authentication
 	two factor authentication
 	check for pages not centered/styled properly
+	add invisible labels to icons for screen readers
+	make an information icon to explain other icons on touchscreens
