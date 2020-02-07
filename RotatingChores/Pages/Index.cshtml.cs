@@ -12,26 +12,10 @@ namespace RotatingChores.Pages
 {
     public class IndexModel : BasePageModel
     {
-        //private readonly UserManager<RotatingChoresUser> _userMangaer;
-        //private readonly SignInManager<RotatingChoresUser> _signInManager;
-
-        //public IndexModel(UserManager<RotatingChoresUser> userManager, SignInManager<RotatingChoresUser> signInManager)
-        //{
-        //    _userMangaer = userManager;
-        //    _signInManager = signInManager;
-        //}
 
         public IActionResult OnGet()
         {
-            //if (_signInManager.IsSignedIn(User))
-            //{
-            //    return RedirectToPage("./Chores/Index");
-            //}
-            //else
-            //{
-            return Page();
-            //}
-
+            return RedirectToPage("./Chores/Index");
         }
     }
 }
