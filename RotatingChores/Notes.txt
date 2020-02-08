@@ -2,4 +2,3 @@
 	about page - description and instructions
 	external authentication
 	two factor authentication
-	check for pages not centered/styled properly

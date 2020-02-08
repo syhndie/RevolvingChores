@@ -4,27 +4,18 @@
     ViewData["Title"] = "Change email";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-<div class="text-center">
-        <h4>Change email address</h4>
-        <partial name="_StatusMessage" for="StatusMessage" />
-    @if (!Model.IsEmailConfirmed)
-    {
-        <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link btn-block">Send verification email</button>
-    }
-</div>
-<div class="row">
-    <div class="col-12">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary btn-block">Save</button>
-        </form>
+
+<h4 class="text-center">Change email address</h4>
+
+<form id="profile-form" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.Email"></label>
+        <input asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
     </div>
-</div>
+    <button id="update-profile-button" type="submit" class="btn btn-primary btn-block">Save</button>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
