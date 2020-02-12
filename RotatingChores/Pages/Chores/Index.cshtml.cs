@@ -36,12 +36,17 @@ namespace RotatingChores.Pages.Chores
 
         public async Task<IActionResult> OnGetAsync()
         {
+            string userid = _userMangaer.GetUserId(User);
+
             Chores = await _context.Chores
-                .Where(ch => ch.RotatingChoresUserID == _userMangaer.GetUserId(User))
+                .Where(ch => ch.RotatingChoresUserID == userid)
+                .ToListAsync();
+
+            Chores = Chores
                 .OrderBy(ch => ch.DueDate)
                 .ThenByDescending(ch => ch.IsHighPriority)
                 .ThenBy(ch => ch.Name)
-                .ToListAsync();
+                .ToList();            
 
             return Page();
         }

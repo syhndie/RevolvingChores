@@ -2,3 +2,6 @@
 	about page - description and instructions
 	external authentication
 	two factor authentication
+	popup? info for chore notes
+	
+	fix chores index dataset ordering (duedate ordering all fucked up)
