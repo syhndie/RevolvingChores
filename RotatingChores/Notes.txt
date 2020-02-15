@@ -3,5 +3,4 @@
 	external authentication
 	two factor authentication
 	popup? info for chore notes
-	
-	fix chores index dataset ordering (duedate ordering all fucked up)
+	When deploying the site, register the new public url from the Google Console.

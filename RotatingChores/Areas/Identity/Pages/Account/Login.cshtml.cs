@@ -85,6 +85,13 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                     return RedirectToPage();
                 }
 
+                if (!user.EmailConfirmed)
+                {
+                    _logger.LogWarning("User email not confirmaed. User not allowed to sign in.");
+                    DangerMessage = "Login not allowed. You need to verify your email address.";
+                    return RedirectToPage();
+                }
+
                 var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 
                 if (result.Succeeded)
@@ -104,7 +111,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                 if (result.IsNotAllowed)
                 {
                     _logger.LogWarning("User not allowed to sign in.");
-                    DangerMessage = "Login not allowed. You may need to verify your email address.";
+                    DangerMessage = "Login not allowed.";
                     return RedirectToPage();
                 }
                 else

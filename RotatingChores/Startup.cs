@@ -77,8 +77,8 @@ namespace RotatingChores
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-
-                options.SignIn.RequireConfirmedEmail = true;
+                //set this to false so that external logins can work, then check manually for local logins
+                options.SignIn.RequireConfirmedEmail = false;
                 options.User.RequireUniqueEmail = true;
             });
 
@@ -94,8 +94,15 @@ namespace RotatingChores
                    emailPassword
                    ));
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //services.AddMvc().AddRazorPagesOptions(options => { options.Conventions.AuthorizeFolder("/Chores"); });
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
