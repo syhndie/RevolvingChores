@@ -43,19 +43,14 @@ namespace RotatingChores.Models
         {
             get
             {
-                switch(FrequencyUnits)
+                return FrequencyUnits switch
                 {
-                    case TimeIntervals.days:
-                        return DateLastCompleted.AddDays(FrequencyValue);
-                    case TimeIntervals.weeks:
-                        return DateLastCompleted.AddDays(FrequencyValue * 7);
-                    case TimeIntervals.months:
-                        return DateLastCompleted.AddMonths(FrequencyValue);
-                    case TimeIntervals.years:
-                        return DateLastCompleted.AddYears(FrequencyValue);
-                    default:
-                        throw new ArgumentException("Chore has invalid Frequency Unit");
-                }
+                    TimeIntervals.days => DateLastCompleted.AddDays(FrequencyValue),
+                    TimeIntervals.weeks => DateLastCompleted.AddDays(FrequencyValue * 7),
+                    TimeIntervals.months => DateLastCompleted.AddMonths(FrequencyValue),
+                    TimeIntervals.years => DateLastCompleted.AddYears(FrequencyValue),
+                    _ => throw new ArgumentException("Chore has invalid Frequency Unit"),
+                };
             }
         }    
     }
