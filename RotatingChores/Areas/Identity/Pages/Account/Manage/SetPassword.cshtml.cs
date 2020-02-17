@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RotatingChores.Areas.Identity.Data;
+using RotatingChores.Models;
+using RotatingChores.Data;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
-    public class SetPasswordModel : PageModel
+    public class SetPasswordModel : BasePageModel
     {
         private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly SignInManager<RotatingChoresUser> _signInManager;
+        private readonly ApplicationDbContext _context;
+        private readonly IEmailSender _emailSender;
 
         public SetPasswordModel(
             UserManager<RotatingChoresUser> userManager,
-            SignInManager<RotatingChoresUser> signInManager)
+            SignInManager<RotatingChoresUser> signInManager,
+            ApplicationDbContext context,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
+            _emailSender = emailSender;
         }
+
+        public bool IsEmailConfirmed { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -65,13 +77,16 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                DangerMessage = "An error occurred when adding password.";
+                return RedirectToPage();
+
             }
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                DangerMessage = "Unable to load user.";
+                return RedirectToPage();
             }
 
             var addPasswordResult = await _userManager.AddPasswordAsync(user, Input.NewPassword);
@@ -84,8 +99,22 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { userId = user.Id, code },
+                protocol: Request.Scheme);
+
+            await _emailSender.SendEmailAsync(user.Email, "Verify your email",
+                $"Please verify your local account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your password has been set.";
+
+            SuccessMessage = "Your password has been set. An email has been sent to the address you provided when creating this account. " +
+                "Please click on the link in that email to verify your address, and create a local account. " +
+                "Once your address has been verified, you may login using your email address and password. " +
+                "You may still continue to login using your Google account as well.";
 
             return RedirectToPage();
         }
