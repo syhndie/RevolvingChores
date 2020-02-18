@@ -1,6 +1,5 @@
 ﻿Next:
 	about page - description and instructions
-	external authentication
-	two factor authentication
 	popup? info for chore notes
-	When deploying the site, register the new public url from the Google Console.
+	make a way to select a chore from the list and move it to the top
+	If I deploy the site, I need to register the new public url from the Google Console.

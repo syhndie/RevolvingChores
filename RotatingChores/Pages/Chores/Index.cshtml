@@ -43,7 +43,12 @@
                                 <span class="sr-only">@highPriorityTitle</span>
                             }
                         <br />
-                        Due 
+                        @if (Model.Chores[i].Notes != "" && Model.Chores[i].Notes != null)
+                        {
+                            @Html.DisplayFor(model => model.Chores[i].Notes)
+                            <br />
+                        }
+                        Due
                         @Html.DisplayFor(model => model.Chores[i].DueDate)
                     </p>
 
