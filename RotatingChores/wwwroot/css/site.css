@@ -6,8 +6,7 @@
     width: 3rem;
     text-align: left;
 }
-.name-column {
-    
+.name-column {    
     text-align: left;
 }
 .icon-column {
@@ -25,6 +24,9 @@
     }
 .delete-btn {
     margin-top: 120px;
+}
+.about-text {
+    font-size: larger;
 }
 
 

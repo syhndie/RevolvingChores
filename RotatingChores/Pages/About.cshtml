@@ -1,10 +1,6 @@
 ﻿@page
 @model RotatingChores.Pages.AboutModel
 
-
-
-
-
 @{
     ViewData["Title"] = "About RoratingChores";
 }
@@ -12,5 +8,33 @@
 <div class="text-center">
     <h2>About</h2>
     <a asp-page="./Chores/Index">All chores</a>
-    <p>text here about how to use the website</p>
+</div>
+<div class="pt-4">
+    <p class="about-text">
+        RotatingChores is a simple, web-based application designed to help manage the
+        regularly recurring tasks of everyday life. Create your own personalized chores, and
+        RotatingChores will arrange them based on how often they need to be done.
+    </p>
+
+    @*only show this part if the user is not signed in*@
+    @if (!Model.IsSignedIn)
+    {
+        <p class="about-text">
+            To get started <a asp-area="Identity" asp-page="Account/Register">register as a new user, using an email address</a>.
+            or <a asp-area="Identity" asp-page="Account/Login">log in</a> immediately with Google.
+        </p>
+        <p class="about-text">
+            Already a RotatingChores user? <a asp-area="Identity" asp-page="Account/Login">Log in</a> to get started.
+        </p>
+    }
+    else
+    {
+        if (!Model.FoundAChore)
+        {
+            @*only show this if user is signed in and has no chores*@
+            <p class="about-text">
+                To get started <a asp-page="./Chores/Create">create your first chore</a>.
+            </p>
+        }
+    }
 </div>

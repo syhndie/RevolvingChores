@@ -1,5 +1,4 @@
 ﻿Next:
 	about page - description and instructions
-	popup? info for chore notes
-	make a way to select a chore from the list and move it to the top
 	If I deploy the site, I need to register the new public url from the Google Console.
+	change all headings to h1/h2, then use css to make them smaller, rather than using h3/h4
