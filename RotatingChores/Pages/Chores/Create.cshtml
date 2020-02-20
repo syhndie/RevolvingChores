@@ -22,8 +22,15 @@
         $(document).ready(function () {
             $("#date").datepicker({
                 orientation: "bottom",
-                todayBtn: "linked"
+                todayBtn: "linked",
+                disableTouchKeyboard: "true"
             });
+        });
+    </script>
+
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery(".datepicker").datepicker({}).attr('readonly', 'readonly');
         });
     </script>
 }
