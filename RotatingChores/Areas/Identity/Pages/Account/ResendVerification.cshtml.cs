@@ -75,8 +75,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Verify your RotatingChores account email address",
-                    $"Please verify the email you provided to RotatingChores by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Verify your RevolvingChores account email address",
+                    $"Please verify the email you provided to RevolvingChores by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 // Don't reveal that the user does exist
                 SuccessMessage = "If the email address you entered is associated with an unverified account, a new verification email message was sent. " +

@@ -114,8 +114,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 
                 await _emailSender.SendEmailAsync(
                     newemail,
-                    "Verify your RotatingChores account new email address.",
-                    $"Please verify your RotatingChores account new email address by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                    "Verify your RevolvingChores account new email address.",
+                    $"Please verify your RevolvingChores account new email address by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
                     );
 
                 SuccessMessage = "An email has been sent to the new address you provided." +

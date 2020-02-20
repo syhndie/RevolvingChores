@@ -79,7 +79,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Verify your email",
-                        $"Please verify your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"Please verify your RevolvingChores account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     SuccessMessage = "An email has been sent to the address you provided. " +
                         "Please click on the link in that email to verify your address. " +

@@ -59,7 +59,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Please reset your RevolvingChores password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 SuccessMessage = "If the email address you entered is associated with a verified account, instructions to reset your password were sent.";
                 return RedirectToPage("./login");
