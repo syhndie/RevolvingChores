@@ -20,7 +20,7 @@
             {
                 string inputChoreId = $"input-{Model.Chores[i].ID}";
                 string buttonChoreId = $"button-{Model.Chores[i].ID}";
-                string todayBtnTitle = $"Set date last completed to today for {Model.Chores[i].Name}";
+                string todayBtnTitle = $"Mark {Model.Chores[i].Name} as done today";
                 string editBtnTitle = $"Edit {Model.Chores[i].Name}";
                 string deleteBtnTitle = $"Delete {Model.Chores[i].Name}";
                 string highPriorityTitle = $"{Model.Chores[i].Name} is high priority.";
@@ -29,7 +29,9 @@
 
             <tr>
                 <td class="button-column pl-0 pr-0">
-                    <button type="button" id=@buttonChoreId class="btn btn-primary btn-sm" title="@todayBtnTitle" aria-label="@todayBtnTitle">Did It Today</button>
+                    <button type="button" id=@buttonChoreId class="btn btn-primary btn-sm update-to-today" title="@todayBtnTitle" aria-label="@todayBtnTitle">
+                        <i aria-hidden="true" title="@todayBtnTitle" class="far fa-check-square fa-2x"></i>
+                    </button>
                 </td>
                 <td class="name-column">
                     <p>

@@ -3,7 +3,6 @@
 	If I deploy the site, I need to register the new public url from the Google Console.
 	change all headings to h1/h2, then use css to make them smaller, rather than using h3/h4
 	is there a way to block the browser from doing autocomplete?
-	indicator that chore is due today
-	make "i did it today" more clear
 	what if you have never done a chore before - what is the datelastcompleted?
 	should be required to put in password to change your email
+	make icons have clickable tooltips
