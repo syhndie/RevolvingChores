@@ -5,4 +5,4 @@
 	is there a way to block the browser from doing autocomplete?
 	what if you have never done a chore before - what is the datelastcompleted?
 	should be required to put in password to change your email
-	make icons have clickable tooltips
+	make help page to explain icons, etc.
