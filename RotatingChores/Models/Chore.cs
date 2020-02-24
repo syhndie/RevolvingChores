@@ -18,10 +18,9 @@ namespace RotatingChores.Models
         [Display(Name = "Chore")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Date is required")]
         [DataType(DataType.Date)]
         [Display(Name = "Last completed")]
-        public DateTime DateLastCompleted { get; set; }
+        public DateTime? DateLastCompleted { get; set; }
 
         [Required(ErrorMessage = "Number is required")]
         [RegularExpression(@"^[1-9]\d*$", ErrorMessage = "This must be a positive integer") ]
@@ -39,16 +38,20 @@ namespace RotatingChores.Models
         public bool IsHighPriority { get; set; }
 
         [DataType(DataType.Date)]
+        public DateTime DateCreated { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DueDate
         {
             get
             {
+                DateTime lastDate = DateLastCompleted != null ? (DateTime)DateLastCompleted : DateCreated;
                 return FrequencyUnits switch
                 {
-                    TimeIntervals.days => DateLastCompleted.AddDays(FrequencyValue),
-                    TimeIntervals.weeks => DateLastCompleted.AddDays(FrequencyValue * 7),
-                    TimeIntervals.months => DateLastCompleted.AddMonths(FrequencyValue),
-                    TimeIntervals.years => DateLastCompleted.AddYears(FrequencyValue),
+                    TimeIntervals.days => lastDate.AddDays(FrequencyValue),
+                    TimeIntervals.weeks => lastDate.AddDays(FrequencyValue * 7),
+                    TimeIntervals.months => lastDate.AddMonths(FrequencyValue),
+                    TimeIntervals.years => lastDate.AddYears(FrequencyValue),
                     _ => throw new ArgumentException("Chore has invalid Frequency Unit"),
                 };
             }

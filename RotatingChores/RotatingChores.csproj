@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20200128211932_CustomUser.Designer.cs" />
     <Compile Remove="Migrations\20200128222558_CustomUser.cs" />
     <Compile Remove="Migrations\20200128222558_CustomUser.Designer.cs" />
+    <Compile Remove="Migrations\20200224222359_AddedDateCreatedToChoreModel.cs" />
+    <Compile Remove="Migrations\20200224222359_AddedDateCreatedToChoreModel.Designer.cs" />
   </ItemGroup>
 
 
