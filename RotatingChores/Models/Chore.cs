@@ -41,11 +41,15 @@ namespace RotatingChores.Models
         public DateTime DateCreated { get; set; }
 
         [DataType(DataType.Date)]
+        public DateTime DateLastModiied { get; set; }
+
+
+        [DataType(DataType.Date)]
         public DateTime DueDate
         {
             get
             {
-                DateTime lastDate = DateLastCompleted != null ? (DateTime)DateLastCompleted : DateCreated;
+                DateTime lastDate = DateLastCompleted != null ? (DateTime)DateLastCompleted : DateLastModiied;
                 return FrequencyUnits switch
                 {
                     TimeIntervals.days => lastDate.AddDays(FrequencyValue),

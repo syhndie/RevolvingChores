@@ -36,7 +36,8 @@ namespace RotatingChores.Pages.Chores
             Chore newChore = new Chore
             {
                 RotatingChoresUserID = _userManager.GetUserId(User),
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now,
+                DateLastModiied = DateTime.Now
             };
 
             var modelDidUpdate = await TryUpdateModelAsync(

@@ -79,6 +79,7 @@ namespace RotatingChores.Pages.Chores
 
             if (modelDidUpdate)
             {
+                choreToEdit.DateLastModiied = DateTime.Now;
                 _context.Attach(choreToEdit).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 SuccessMessage = $"'{choreToEdit.Name}' chore successfully updated.";
