@@ -10,6 +10,7 @@ using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using RotatingChores.Areas.Identity.Data;
+using RotatingChores.Helpers;
 
 namespace RotatingChores.Pages.Chores
 {
@@ -23,10 +24,6 @@ namespace RotatingChores.Pages.Chores
 
         [BindProperty]
         public int ChoreID { get; set; }
-
-        //[BindProperty]
-        //[DataType(DataType.Date)]
-        //public DateTime ChoreDate { get; set; }
 
         public IndexModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
@@ -63,7 +60,14 @@ namespace RotatingChores.Pages.Chores
 
             try
             {
-                choreToEdit.DateLastCompleted = DateTime.Today;
+                choreToEdit.DueDate = choreToEdit.FrequencyUnits switch
+                {
+                    TimeIntervals.days => DateTime.Today.AddDays(choreToEdit.FrequencyValue),
+                    TimeIntervals.weeks => DateTime.Today.AddDays(choreToEdit.FrequencyValue * 7),
+                    TimeIntervals.months => DateTime.Today.AddMonths(choreToEdit.FrequencyValue),
+                    TimeIntervals.years => DateTime.Today.AddYears(choreToEdit.FrequencyValue),
+                    _ => throw new ArgumentException("Chore has invalid Frequency Unit")
+                };
             }
             catch
             {

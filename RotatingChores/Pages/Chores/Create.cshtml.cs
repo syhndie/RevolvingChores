@@ -44,7 +44,7 @@ namespace RotatingChores.Pages.Chores
                newChore,
                "",
                c => c.Name,
-               c => c.DateLastCompleted,
+               c => c.DueDate,
                c => c.FrequencyValue,
                c => c.FrequencyUnits,
                c => c.Notes,
