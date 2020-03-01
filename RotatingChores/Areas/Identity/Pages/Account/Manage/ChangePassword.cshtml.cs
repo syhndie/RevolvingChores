@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RotatingChores.Areas.Identity.Data;
+using RotatingChores.Models;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
-    public class ChangePasswordModel : PageModel
+    public class ChangePasswordModel : BasePageModel
     {
         private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly SignInManager<RotatingChoresUser> _signInManager;
@@ -57,7 +58,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                DangerMessage = "Unable to load user";
+                return RedirectToPage();
             }
 
             var hasPassword = await _userManager.HasPasswordAsync(user);

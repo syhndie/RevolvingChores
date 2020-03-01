@@ -5,45 +5,6 @@
 	is there a way to block the browser from doing autocomplete?
 
 	should be required to put in password to change your email
-	make help page to explain icons, etc.
+		follow change password example, so that users with local account have different choices than users with external logins
 
-
-	Chore
-	Name
-	FrequencyNumber
-	FrequencyValue
-	IsHighPriority
-	Notes
-	DueDate
-	DateCreated
-	DateLastModified
-
-Chore Create/Edit form has 
-		Name
-		FrequencyNumber
-		FrequencyValue
-		IsHighPriority
-		Notes
-		DueDate
-		
-DueDate is used to sort Chores Index table
-
-When you click the "i did it today" button, the DueDate automatically updates,
-based on FrequencyNumber and FrequencyValue, and today's date
-
-You can always edit the DueDate, by using the Chore Edit page
-
-        {
-            get
-            {
-                DateTime lastDate = DateLastCompleted != null ? (DateTime)DateLastCompleted : DateLastModiied;
-                return FrequencyUnits switch
-                {
-                    TimeIntervals.days => lastDate.AddDays(FrequencyValue),
-                    TimeIntervals.weeks => lastDate.AddDays(FrequencyValue * 7),
-                    TimeIntervals.months => lastDate.AddMonths(FrequencyValue),
-                    TimeIntervals.years => lastDate.AddYears(FrequencyValue),
-                    _ => throw new ArgumentException("Chore has invalid Frequency Unit"),
-                };
-            }
-        }    
+	make help page to explain icons on chores index page

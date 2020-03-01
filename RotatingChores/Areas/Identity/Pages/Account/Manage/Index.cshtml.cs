@@ -37,8 +37,6 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 
         public bool IsEmailConfirmed { get; set; }
 
-        [TempData]
-        public string StatusMessage { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -48,6 +46,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            public string Password { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -59,17 +59,23 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
                 return RedirectToPage();
             }
 
-            var userName = await _userManager.GetUserNameAsync(user);
-            var email = await _userManager.GetEmailAsync(user);
+            var hasPassword = await _userManager.HasPasswordAsync(user);
+            if (!hasPassword)
+            {
+                //TODO!!! decide what to do with users who have only external logins
+                DangerMessage = "Only External Login!!!";
+                return RedirectToPage("./SetPassword");
+            }
 
-            Username = userName;
+            Username = await _userManager.GetUserNameAsync(user);
+            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+
+            var email = await _userManager.GetEmailAsync(user);
 
             Input = new InputModel
             {
                 Email = email
             };
-
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
             return Page();
         }
@@ -86,6 +92,12 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             if (user == null)
             {
                 DangerMessage = "Unable to load user.";
+                return RedirectToPage();
+            }
+
+            if (!await _userManager.CheckPasswordAsync(user, Input.Password))
+            {
+                DangerMessage = "Password not correct.";
                 return RedirectToPage();
             }
 
