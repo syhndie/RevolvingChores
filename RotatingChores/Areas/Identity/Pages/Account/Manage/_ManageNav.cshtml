@@ -1,16 +1,29 @@
 ﻿@using RotatingChores.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<RotatingChoresUser> SignInManager
+@inject UserManager<RotatingChoresUser> UserManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var user = await UserManager.GetUserAsync(User);
+    var hasPassword = await UserManager.HasPasswordAsync(user);
 }
-<ul class="nav nav-pills flex-column text-center">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Change email address</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Change password</a></li>
-    @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    @*<li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>*@
-    <li class="nav-item"><a class="nav-link @ManageNavPages.DeleteAccountNavClass(ViewContext)" id="personal-data" asp-page="./DeleteAccount">Delete account</a></li>
-</ul>
+    <ul class="nav nav-pills flex-column text-center">
+        @if (hasPassword)
+        {
+            <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="change-password" asp-page="./Index">Change password</a></li>
+            <li class="nav-item"><a class="nav-link @ManageNavPages.ChangeEmailNavClass(ViewContext)" id="profile" asp-page="./ChangeEmail">Change email address</a></li>
+        }
+        else
+        {
+            <li class="nav-item"><a class="nav-link @ManageNavPages.CreateLocalAccountNavClass(ViewContext)" id="create-local-account" asp-page="./CreateLocalAccount">Create Local Account</a></li>
+        }
+
+        @if (hasExternalLogins)
+        {
+            <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        }
+        @*<li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>*@
+        <li class="nav-item"><a class="nav-link @ManageNavPages.DeleteAccountNavClass(ViewContext)" id="personal-data" asp-page="./DeleteAccount">Delete account</a></li>
+    </ul>
 <hr />

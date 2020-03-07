@@ -2,52 +2,55 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using RotatingChores.Areas.Identity.Data;
 using RotatingChores.Models;
-using RotatingChores.Data;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
-    public partial class IndexModel : BasePageModel
+    public class IndexModel : BasePageModel
     {
         private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly SignInManager<RotatingChoresUser> _signInManager;
-        private readonly ApplicationDbContext _context;
-        private readonly IEmailSender _emailSender;
+        private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(
             UserManager<RotatingChoresUser> userManager,
             SignInManager<RotatingChoresUser> signInManager,
-            ApplicationDbContext context,
-            IEmailSender emailSender)
+            ILogger<IndexModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
-            _emailSender = emailSender;
+            _logger = logger;
         }
-
-        public string Username { get; set; }
-
-        public bool IsEmailConfirmed { get; set; }
-
 
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [DataType(DataType.Password)]
+            [Display(Name = "Current password")]
+            public string OldPassword { get; set; }
 
-            public string Password { get; set; }
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "New password")]
+            public string NewPassword { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm new password")]
+            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -62,20 +65,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             var hasPassword = await _userManager.HasPasswordAsync(user);
             if (!hasPassword)
             {
-                //TODO!!! decide what to do with users who have only external logins
-                DangerMessage = "Only External Login!!!";
-                return RedirectToPage("./SetPassword");
+                return RedirectToPage("./CreateLocalAccount");
             }
-
-            Username = await _userManager.GetUserNameAsync(user);
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
-
-            var email = await _userManager.GetEmailAsync(user);
-
-            Input = new InputModel
-            {
-                Email = email
-            };
 
             return Page();
         }
@@ -84,61 +75,29 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
         {
             if (!ModelState.IsValid)
             {
-                DangerMessage = "An error occurred when changing email address.";
-                return RedirectToPage();
+                return Page();
             }
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                DangerMessage = "Unable to load user.";
-                return RedirectToPage();
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!await _userManager.CheckPasswordAsync(user, Input.Password))
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+            if (!changePasswordResult.Succeeded)
             {
-                DangerMessage = "Password not correct.";
-                return RedirectToPage();
-            }
-
-            var oldemail = await _userManager.GetEmailAsync(user);
-            var newemail = Input.Email;
-
-            if (newemail != oldemail)
-            {
-                if (_context.Users.Any(u => u.Email == newemail))
+                foreach (var error in changePasswordResult.Errors)
                 {
-                    DangerMessage = "An error occurred when changing your email address.The new email address may already exist in our system.";
-                    return RedirectToPage();
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
-
-                user.PendingEmail = newemail;
-                await _userManager.UpdateAsync(user);
-
-                var changeEmailToken = await _userManager.GenerateChangeEmailTokenAsync(user, Input.Email);
-
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmChangedEmail",
-                    pageHandler: null,
-                    values: new { userID = user.Id, changeEmailToken, newemail},
-                    protocol: Request.Scheme
-                    );
-
-                await _emailSender.SendEmailAsync(
-                    newemail,
-                    "Verify your RevolvingChores account new email address.",
-                    $"Please verify your RevolvingChores account new email address by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
-                    );
-
-                SuccessMessage = "An email has been sent to the new address you provided." +
-                        "Please click on the link in that email to verify your new address." +
-                        "Once the new address has been verified, you may login with that address.";
-
-                return RedirectToPage();
+                return Page();
             }
 
-            //If we got this far, the email address entered was the same as the old address
-            DangerMessage = "The email address you entered is the same as the address in our database.";
+            await _signInManager.RefreshSignInAsync(user);
+            _logger.LogInformation("User changed their password successfully.");
+            StatusMessage = "Your password has been changed.";
+
             return RedirectToPage();
         }
     }

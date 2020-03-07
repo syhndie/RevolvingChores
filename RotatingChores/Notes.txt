@@ -1,10 +1,13 @@
 ﻿Next:
 
+
+	change email address cofnirmation takes you to login, but you are still logged in
+
+	either change "create local account" wording, or take away the option
+
+
 	If I deploy the site, I need to register the new public url from the Google Console.
 
 	is there a way to block the browser from doing autocomplete?
-
-	should be required to put in password to change your email
-		follow change password example, so that users with local account have different choices than users with external logins
 
 	make help page to explain icons on chores index page

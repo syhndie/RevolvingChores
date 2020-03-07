@@ -1,15 +1,14 @@
 ﻿@page
-@model SetPasswordModel
+@model CreateLocalAccountModel
 @{
     ViewData["Title"] = "Set password";
-    ViewData["ActivePage"] = ManageNavPages.ChangePassword;
+    ViewData["ActivePage"] = ManageNavPages.CreateLocalAccount;
 }
 
-<h2>Set your password</h2>
+<h2>Create a local account</h2>
 <partial name="_StatusMessage" for="StatusMessage" />
 <p class="text-info">
-    You do not have a local password for this site. Adding a local
-    password will allow you to log in locally, without using Google. 
+    Add a password to create a local account. This will allow you to log in without using Google.
 </p>
 <div class="row">
     <div class="col-md-6">

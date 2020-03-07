@@ -7,7 +7,9 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
     {
         public static string Index => "Index";
 
-        public static string ChangePassword => "ChangePassword";
+        public static string ChangeEmail => "ChangeEmail";
+
+        public static string CreateLocalAccount => "CreateLocalAccount";
 
         public static string ExternalLogins => "ExternalLogins";
 
@@ -17,7 +19,9 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
-        public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
+        public static string ChangeEmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangeEmail);
+
+        public static string CreateLocalAccountNavClass(ViewContext viewContext) => PageNavClass(viewContext, CreateLocalAccount);
 
         public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
 
