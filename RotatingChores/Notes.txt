@@ -1,8 +1,5 @@
 ﻿Next:
 
-
-	change email address cofnirmation takes you to login, but you are still logged in
-
 	either change "create local account" wording, or take away the option
 
 

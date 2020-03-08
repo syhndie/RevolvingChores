@@ -57,14 +57,14 @@ namespace RotatingChores.Areas.Identity.Pages.Account
                         {
                             transaction.Commit();
                             SuccessMessage = "Thank you for verifying your new email address.";
-                            return RedirectToPage("./Login");
+                            return RedirectToPage("/Chores/Index");
                         }
 
                         DangerMessage = "An error occurred when changing your email address. Email address was not changed.";
-                        return RedirectToPage("./Login");
+                        return RedirectToPage("/Chores/Index");
                     }
 
-                    return RedirectToPage("./Login");
+                    return RedirectToPage("/Chores/Index");
                 }
                 catch(Exception)
                 {
