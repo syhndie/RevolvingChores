@@ -8,3 +8,7 @@
 	is there a way to block the browser from doing autocomplete?
 
 	make help page to explain icons on chores index page
+
+	if email is unconfirmed, have a resend option on the account management page
+
+	fix weird centering issues in Manage Account pages

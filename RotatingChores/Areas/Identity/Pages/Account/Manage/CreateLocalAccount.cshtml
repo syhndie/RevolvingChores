@@ -5,29 +5,34 @@
     ViewData["ActivePage"] = ManageNavPages.CreateLocalAccount;
 }
 
-<h2>Create a local account</h2>
-<partial name="_StatusMessage" for="StatusMessage" />
-<p class="text-info">
-    Add a password to create a local account. This will allow you to log in without using Google.
-</p>
-<div class="row">
-    <div class="col-md-6">
-        <form id="set-password-form" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.NewPassword"></label>
-                <input asp-for="Input.NewPassword" class="form-control" />
-                <span asp-validation-for="Input.NewPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Set password</button>
-        </form>
+    <div class="text-center">
+        <h2>Set password</h2>
+        <partial name="_StatusMessage" for="StatusMessage" />
+        <div class="alert-info alert" role="alert">
+            <p>
+                After verifying your email address, you will be able to log in with your email address and password.
+                You will still be able to log in with Google.
+            </p>
+        </div>
     </div>
-</div>
+
+<form id="set-password-form" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.NewPassword"></label>
+        <input asp-for="Input.NewPassword" class="form-control" />
+        <span asp-validation-for="Input.NewPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.ConfirmPassword"></label>
+        <input asp-for="Input.ConfirmPassword" class="form-control" />
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Set password</button>
+
+    @*<button class="btn btn-danger btn-block" type="submit">Delete my account</button>*@
+
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

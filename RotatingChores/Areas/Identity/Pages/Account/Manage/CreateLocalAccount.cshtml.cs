@@ -112,9 +112,9 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             await _signInManager.RefreshSignInAsync(user);
 
             SuccessMessage = "An email has been sent to the address you provided when creating this account. " +
-                "Please click on the link in that email to verify your address, and create a local account. " +
-                "Once your address has been verified, you may login using your email address and password. " +
-                "You may still continue to login using your Google account as well.";
+                "Please click on the link in that email to verify your address. " +
+                "Once the address has been verified, you may log in using your email address and password. " +
+                "You may still continue to log in using your Google account as well.";
 
             return RedirectToPage();
         }
