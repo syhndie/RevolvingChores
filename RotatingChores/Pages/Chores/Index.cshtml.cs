@@ -20,7 +20,7 @@ namespace RotatingChores.Pages.Chores
 
         private readonly ApplicationDbContext _context;
 
-        public IList<Chore> Chores { get; set; }
+        public List<Chore> Chores { get; set; }
 
         [BindProperty]
         public int ChoreID { get; set; }
@@ -35,14 +35,25 @@ namespace RotatingChores.Pages.Chores
         {
             string userid = _userMangaer.GetUserId(User);
 
-            Chores = await _context.Chores
+            List<SortableChore> sortableChores = await _context.Chores
                 .Where(ch => ch.RotatingChoresUserID == userid)
+                .Select(ch => new SortableChore(ch, false))
                 .ToListAsync();
 
-            Chores = Chores
-                .OrderBy(ch => ch.DueDate)
-                .ThenByDescending(ch => ch.IsHighPriority)
-                .ThenBy(ch => ch.Name)
+            foreach (SortableChore sortableChore in sortableChores)
+            {
+                if (sortableChore.Chore.DueDate <= DateTime.Today && sortableChore.Chore.IsHighPriority)
+                {
+                    sortableChore.ListFirst = true;
+                }
+            }
+
+            Chores = sortableChores
+                .OrderByDescending(sc => sc.ListFirst)
+                .ThenBy(sc => sc.Chore.DueDate)
+                .ThenByDescending(sc => sc.Chore.IsHighPriority)
+                .ThenBy(sc => sc.Chore.Name)
+                .Select(sc => sc.Chore)
                 .ToList();            
 
             return Page();
