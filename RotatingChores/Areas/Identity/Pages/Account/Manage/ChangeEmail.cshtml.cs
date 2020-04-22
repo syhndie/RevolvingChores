@@ -47,6 +47,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             [EmailAddress]
             public string Email { get; set; }
 
+            [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
         }
 
@@ -122,8 +124,8 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
                     $"Please verify your RevolvingChores account new email address by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
                     );
 
-                SuccessMessage = "An email has been sent to the new address you provided." +
-                        "Please click on the link in that email to verify your new address." +
+                SuccessMessage = "An email has been sent to the new address you provided. " +
+                        "Please click on the link in that email to verify your new address. " +
                         "Once the new address has been verified, you may login with that address.";
 
                 return RedirectToPage();
