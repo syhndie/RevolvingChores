@@ -25,6 +25,9 @@ namespace RotatingChores.Pages.Chores
         [BindProperty]
         public int ChoreID { get; set; }
 
+        [BindProperty]
+        public DateTime LocalDate { get; set; }
+
         public IndexModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userMangaer = userManager;
@@ -73,10 +76,10 @@ namespace RotatingChores.Pages.Chores
             {
                 choreToEdit.DueDate = choreToEdit.FrequencyUnits switch
                 {
-                    TimeIntervals.days => DateTime.Today.AddDays(choreToEdit.FrequencyValue),
-                    TimeIntervals.weeks => DateTime.Today.AddDays(choreToEdit.FrequencyValue * 7),
-                    TimeIntervals.months => DateTime.Today.AddMonths(choreToEdit.FrequencyValue),
-                    TimeIntervals.years => DateTime.Today.AddYears(choreToEdit.FrequencyValue),
+                    TimeIntervals.days => LocalDate.AddDays(choreToEdit.FrequencyValue),
+                    TimeIntervals.weeks => LocalDate.AddDays(choreToEdit.FrequencyValue * 7),
+                    TimeIntervals.months => LocalDate.AddMonths(choreToEdit.FrequencyValue),
+                    TimeIntervals.years => LocalDate.AddYears(choreToEdit.FrequencyValue),
                     _ => throw new ArgumentException("Chore has invalid Frequency Unit")
                 };
             }

@@ -7,7 +7,6 @@
 
 <div class="text-center">
     <h1>All chores</h1>
-
     <p>
         <a asp-page="Create">Create new chore</a>
     </p>
@@ -73,14 +72,24 @@
 </form>
 <form id="submit-form" asp-page-handler="update" method="post">
     <input id="submit-chore-id" type="hidden" asp-for="@Model.ChoreID" />
+    <input id="submit-local-date" type="hidden" asp-for="@Model.LocalDate" />
 </form>
 
 @section Scripts {
     <script type="text/javascript">
         function savedate() {
+            //rewrite this because it is weird
+            var todaydate = new Date();
+            var dd = String(todaydate.getDate()).padStart(2, '0');
+            var mm = String(todaydate.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = todaydate.getFullYear();
+            todaystring = yyyy + '/' + mm + '/' + dd;
+
             var choreid = this.id.split("-")[1];
             var $submitForm = $($("#submit-form"));
+
             $("#submit-chore-id").val(choreid);
+            $("#submit-local-date").val(todaystring);
             $submitForm.submit();            
         }
 
