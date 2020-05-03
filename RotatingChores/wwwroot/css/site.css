@@ -28,6 +28,43 @@ h1 {
 h2 {
     font-size: 1.5rem;
 }
+body {
+    font-family: Tahoma;
+    background-color: #FFFAF0;
+}
+.fa-star {
+
+}
+.fa-edit {
+    color: #a5899a;
+}
+.fa-trash-alt {
+    color: #a5899a;
+}
+.fa-edit:hover {
+    color: black;
+}
+.fa-trash-alt:hover {
+    color: black;
+}
+.btn-primary {
+    background-color: #a5899a;
+    border: none;
+}
+.text-warning {
+
+}
+a {
+    color: #a5899a;
+    
+}
+a:hover {
+        color: black;
+    }
+.btn-primary:hover {
+    background-color: black;
+}
+
 
 
 

@@ -50,12 +50,13 @@
                         @Html.DisplayFor(model => model.Chores[i].DueDate)
                         @if (Model.Chores[i].DueDate == DateTime.Today)
                         {
-                            <i aria-hidden="true" title="@dueTodayTitle" class="fas fa-exclamation-triangle text-warning"></i>
+                            <i aria-hidden="true" title="@dueTodayTitle" class="fas fa-exclamation"></i>
                             <span class="sr-only">@dueTodayTitle</span>
                         }
                         @if (Model.Chores[i].DueDate < DateTime.Today)
                         {
-                            <i aria-hidden="true" title="@overdueTitle" class="fas fa-exclamation-triangle text-danger"></i>
+                            <i aria-hidden="true" title="@overdueTitle" class="fas fa-exclamation"></i>
+                            <i aria-hidden="true" title="@overdueTitle" class="fas fa-exclamation"></i>
                             <span class="sr-only">@overdueTitle</span>
                         }
                     </p>
