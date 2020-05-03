@@ -28,12 +28,11 @@ h1 {
 h2 {
     font-size: 1.5rem;
 }
+
+
 body {
     font-family: Tahoma;
     background-color: #FFFAF0;
-}
-.fa-star {
-
 }
 .fa-edit {
     color: #a5899a;
@@ -51,28 +50,32 @@ body {
     background-color: #a5899a;
     border: none;
 }
-.text-warning {
-
+.btn-primary:hover {
+        background-color: black;
 }
 a {
-    color: #a5899a;
-    
+    color: #a5899a;    
 }
 a:hover {
         color: black;
-    }
-.btn-primary:hover {
-    background-color: black;
 }
-
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+    color: #a5899a;
+}
+a.text-dark:hover, a.text-dark:focus {
+    color: #a5899a !important
+}
+.text-dark:hover {
+    color: #a5899a !important
+}
 
 
 
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Sticky footer styles
