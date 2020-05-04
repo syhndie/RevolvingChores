@@ -68,6 +68,10 @@ a.text-dark:hover, a.text-dark:focus {
 .text-dark:hover {
     color: #a5899a !important
 }
+.alert-green {
+    background-color: #f8fee0;
+    border: none;
+}
 
 
 
