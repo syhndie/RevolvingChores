@@ -15,14 +15,14 @@
 
     if (!String.IsNullOrEmpty((string)TempData["DangerMessage"]))
     {
-        <div class="alert alert-red" role="alert">
+        <div class="alert alert-red text-center" role="alert">
             <p>@TempData["DangerMessage"]</p>
         </div>
     }
 
     if (!String.IsNullOrEmpty((string)TempData["WarningMessage"]))
     {
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-warning text-center" role="alert">
             <p>@TempData["WarningMessage"]</p>
         </div>
     }
