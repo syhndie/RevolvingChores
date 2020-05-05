@@ -75,6 +75,9 @@ a.text-dark:hover, a.text-dark:focus {
 .alert-red {
     background-color: #fee0e1;
 }
+.nav-pills .nav-link.active {
+    background-color: #a5899a;
+}
 
 
 
