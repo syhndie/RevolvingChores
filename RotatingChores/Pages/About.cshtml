@@ -12,9 +12,47 @@
 <div class="pt-4">
     <p class="about-text">
         RevolvingChores is a simple, web-based application designed to help manage the
-        regularly recurring tasks of everyday life. Create your own personalized chores, and
-        RotatingChores will arrange them based on how often they need to be done.
+        recurring tasks of everyday life. <a asp-page="./Chores/Create">Create your personalized chores</a> , and
+        RevolvingChores will sort them by how often they need to be done and how important they are.
     </p>
+    <hr />
+    <p class="about-text">
+        <a asp-page="./Chores/Index">Your sorted list of chores</a> includes icons that highlight certain chores:
+    </p>
+    <table class="ml-5">
+        <tbody>
+            <tr>
+                <td class="pr-4">
+                    <i aria-hidden="true" title="Star Icon" class="fas fa-star"></i>
+                    <span class="sr-only">Star Icon</span>
+                </td>
+                <td>
+                    High-priority chore
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i aria-hidden="true" title="Exlamation Icon" class="fas fa-exclamation"></i>
+                    <span class="sr-only">Exclamation Icon</span>
+                </td>
+                <td>
+                    Chore due today
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i aria-hidden="true" title="Double Exclamation Icon" class="fas fa-exclamation"></i>
+                    <i aria-hidden="true" class="fas fa-exclamation"></i>
+                    <span class="sr-only">Double Exclamation Icon</span>
+                </td>
+                <td>
+                    Chore past due
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+
 
     @*only show this part if the user is not signed in*@
     @if (!Model.IsSignedIn)
