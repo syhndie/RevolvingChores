@@ -5,7 +5,6 @@
     ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
 }
 
-<partial name="_StatusMessage" for="StatusMessage" />
 @if (Model.CurrentLogins?.Count > 0)
 {
 <div class="text-center">
@@ -17,7 +16,7 @@
             {
                 <tr>
                     <td>@login.ProviderDisplayName</td>
-                    <td>
+                    <td class="right-align-cell">
                         @if (Model.ShowRemoveButton)
                         {
                             <form id="remove-login" asp-page-handler="RemoveLogin" method="post">

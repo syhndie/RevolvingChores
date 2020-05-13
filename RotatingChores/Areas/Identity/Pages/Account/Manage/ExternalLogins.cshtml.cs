@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RotatingChores.Areas.Identity.Data;
+using RotatingChores.Models;
 
 namespace RotatingChores.Areas.Identity.Pages.Account.Manage
 {
-    public class ExternalLoginsModel : PageModel
+    public class ExternalLoginsModel : BasePageModel
     {
         private readonly UserManager<RotatingChoresUser> _userManager;
         private readonly SignInManager<RotatingChoresUser> _signInManager;
@@ -28,9 +29,6 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
         public IList<AuthenticationScheme> OtherLogins { get; set; }
 
         public bool ShowRemoveButton { get; set; }
-
-        [TempData]
-        public string StatusMessage { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -64,7 +62,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "The external login was removed.";
+            SuccessMessage = "The external login was removed.";
             return RedirectToPage();
         }
 
@@ -102,7 +100,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account.Manage
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            SuccessMessage = "The external login was added.";
             return RedirectToPage();
         }
     }

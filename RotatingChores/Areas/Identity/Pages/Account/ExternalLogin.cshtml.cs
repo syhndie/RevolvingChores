@@ -10,11 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RotatingChores.Areas.Identity.Data;
+using RotatingChores.Models;
 
 namespace RotatingChores.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ExternalLoginModel : PageModel
+    public class ExternalLoginModel : BasePageModel
     {
         private readonly SignInManager<RotatingChoresUser> _signInManager;
         private readonly UserManager<RotatingChoresUser> _userManager;
@@ -36,9 +37,6 @@ namespace RotatingChores.Areas.Identity.Pages.Account
         public string LoginProvider { get; set; }
 
         public string ReturnUrl { get; set; }
-
-        [TempData]
-        public string ErrorMessage { get; set; }
 
         public class InputModel
         {
@@ -65,13 +63,13 @@ namespace RotatingChores.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                DangerMessage = $"Error from external provider: {remoteError}";
                 return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
+                DangerMessage = "Error loading external login information.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -109,7 +107,7 @@ namespace RotatingChores.Areas.Identity.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                DangerMessage = "Error loading external login information during confirmation.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
