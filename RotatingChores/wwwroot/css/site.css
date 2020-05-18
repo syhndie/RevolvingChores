@@ -56,6 +56,11 @@ body {
 .btn-primary:hover {
         background-color: black;
 }
+.btn-danger {
+    background-color: #fee0e1;
+    border: none;
+    color: black;
+}
 a {
     color: #a5899a;    
 }

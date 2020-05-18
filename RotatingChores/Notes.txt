@@ -1,14 +1,20 @@
 ﻿Next:
 
-	either change "create local account" wording, or take away the option
+	change color of chore delete button
 
+	make chore name/user unique in the database and enforce with code
+
+	make all messages consistent with basepagemodel
+
+	change checkbox icon to star for high priority chores
+
+	check sort order for chores (should be high priority and due/overdue, sorted by due date; followed by regular priority, sorted by due date)
 
 	If I deploy the site, I need to register the new public url from the Google Console.
 
-	is there a way to block the browser from doing autocomplete?
 
-	make help page to explain icons on chores index page
 
-	if email is unconfirmed, have a resend option on the account management page
 
-	fix weird centering issues in Manage Account pages
+
+
+

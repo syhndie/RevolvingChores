@@ -15,7 +15,7 @@ namespace RotatingChores.Models
         [Required]
         public string RotatingChoresUserID { get; set; }
 
-
+        
         [Required(ErrorMessage = "Name is required")]        
         [Display(Name = "Chore")]
         public string Name { get; set; }
