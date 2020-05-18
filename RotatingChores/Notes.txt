@@ -1,6 +1,5 @@
 ﻿Next:
 
-	change color of chore delete button
 
 	make chore name/user unique in the database and enforce with code
 

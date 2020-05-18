@@ -9,6 +9,7 @@ using RotatingChores.Data;
 using RotatingChores.Models;
 using Microsoft.AspNetCore.Identity;
 using RotatingChores.Areas.Identity.Data;
+using System.Data.SqlTypes;
 
 namespace RotatingChores.Pages.Chores
 {
@@ -33,9 +34,11 @@ namespace RotatingChores.Pages.Chores
 
         public async Task<IActionResult> OnPostAsync()
         {
+            string userId = _userManager.GetUserId(User);
+
             Chore newChore = new Chore
             {
-                RotatingChoresUserID = _userManager.GetUserId(User),
+                RotatingChoresUserID = userId,
                 DateCreated = DateTime.Now,
                 DateLastModiied = DateTime.Now
             };
@@ -52,6 +55,18 @@ namespace RotatingChores.Pages.Chores
             
             if (modelDidUpdate)
             {
+                List<string> usedChoreNames = _context.Chores
+                    .Where(ch => ch.RotatingChoresUserID == userId)
+                    .Select(ch => ch.Name)
+                    .ToList();
+
+                if (usedChoreNames.Contains(newChore.Name))
+                {
+                    DangerMessage = $"The Chore '{newChore.Name}' already exists.";
+
+                    return RedirectToPage();
+                }
+
                 _context.Chores.Add(newChore);
                 await _context.SaveChangesAsync();
                 SuccessMessage = $"'{newChore.Name}' chore successfully added";
