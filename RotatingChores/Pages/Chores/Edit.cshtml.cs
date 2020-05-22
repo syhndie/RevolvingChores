@@ -21,9 +21,6 @@ namespace RotatingChores.Pages.Chores
 
         public Chore Chore { get; set; }
 
-        [BindProperty]
-        public int ChoreID { get; set; }
-
         public EditModel(UserManager<RotatingChoresUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -57,18 +54,20 @@ namespace RotatingChores.Pages.Chores
                 return NotFound();
             }
 
-            Chore choreToEdit = await _context.Chores
-                .Where(ch => ch.RotatingChoresUserID == _userManager.GetUserId(User))
+            string userId = _userManager.GetUserId(User);
+
+            Chore = await _context.Chores
+                .Where(ch => ch.RotatingChoresUserID == userId)
                 .SingleOrDefaultAsync(ch => ch.ID == id);
 
-            if (choreToEdit is null)
+            if (Chore is null)
             {
                 DangerMessage = "The chore you tried to update has been deleted.";
                 return RedirectToPage("./Index");
             }
 
             var modelDidUpdate = await TryUpdateModelAsync(
-                choreToEdit,
+                Chore,
                 "",
                 c => c.Name,
                 c => c.DueDate,
@@ -79,15 +78,29 @@ namespace RotatingChores.Pages.Chores
 
             if (modelDidUpdate)
             {
-                choreToEdit.DateLastModiied = DateTime.Now;
-                _context.Attach(choreToEdit).State = EntityState.Modified;
+                List<string> usedChoreNames = _context.Chores
+                    .Where(ch => ch.RotatingChoresUserID == userId)
+                    .Where(ch => ch.ID != id)
+                    .Select(ch => ch.Name)
+                    .ToList();
+
+                if (usedChoreNames.Contains(Chore.Name))
+                {
+                    DangerMessage = $"The Chore '{Chore.Name}' already exists.";
+
+                    return RedirectToPage(new { id });
+                }
+
+
+                Chore.DateLastModiied = DateTime.Now;
+                _context.Attach(Chore).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                SuccessMessage = $"'{choreToEdit.Name}' chore successfully updated.";
+                SuccessMessage = $"'{Chore.Name}' chore successfully updated.";
                 return RedirectToPage("./Index");
             }
 
             DangerMessage = "Chore did not update successfully.";
-            return RedirectToPage();
+            return RedirectToPage(new { id });
         }
     }
 }

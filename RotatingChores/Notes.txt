@@ -2,6 +2,8 @@
 
 
 	make chore name/user unique in the database and enforce with code
+		!!!Chore Edit page is broken - when dup chore name is entered, it doesn't redirect correctly - loses chore id in the process
+		!!@
 
 	make all messages consistent with basepagemodel
 
