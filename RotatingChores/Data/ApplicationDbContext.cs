@@ -17,6 +17,14 @@ namespace RotatingChores.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Chore>()
+                .HasIndex(ch => new { ch.RotatingChoresUserID, ch.Name})
+                .IsUnique();
+
+            base.OnModelCreating(builder);
+        }
         public DbSet<Chore> Chores { get; set; }
         
     }
