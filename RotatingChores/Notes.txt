@@ -1,13 +1,56 @@
 ﻿Next:
 
-
-	make chore name/user unique in the database and enforce with code
-		!!!Chore Edit page is broken - when dup chore name is entered, it doesn't redirect correctly - loses chore id in the process
-		!!@
-
 	make all messages consistent with basepagemodel
 
 	change checkbox icon to star for high priority chores
+		<input type="checkbox" class="fancy-check" id="myId"/>
+		<label for="myId" ><span>The label text</span></label>
+
+		/*Move he original checkbox out of the way */
+        [type="checkbox"].fancy-check {
+          position: absolute;
+          left: -9999px;
+        }
+        /*Align the icon and the label text to same height using tabl-cell display*/
+        /*If you change the font-size of the text, you may also want to do som padding or alignhment changes here*/
+        .fancy-check ~ label >  span {
+          display: table-cell;
+          vertical-align: middle;
+          padding-left: 5px;
+        }
+        /*The label will contain the icon and the text, will grab the focus*/
+        [type="checkbox"].fancy-check + label {
+          cursor: pointer;
+          display: table;
+        }
+        /*The icon container, set it to fixed size and font size, the padding is to align the border*/
+        /*If you change the font-size of this icon, be sure to adjust the min-width as well*/
+        [type="checkbox"].fancy-check + label:before {
+          font-family: 'FontAwesome';
+          display: inline-block;
+          box-sizing: border-box;
+          border: 1px solid transparent;
+          font-size: 22px;
+          min-width: 28px;
+          padding: 2px 0 0 3px;
+        }
+        /* toggle font awsome icon*/
+        [type="checkbox"].fancy-check:checked + label:before {
+          content: "\f046";
+        }
+        [type="checkbox"].fancy-check:not(:checked) + label:before {
+          content: "\f096";    
+        }
+        /*Do something on focus, in this case show dashed border*/
+        [type="checkbox"].fancy-check:focus + label:before {
+          border: 1px dashed #777;
+        }
+        /*Do something on hover, in this case change the image color*/
+        [type="checkbox"].fancy-check:hover + label:before {
+           color: #67afe5;
+        }
+
+
 
 	check sort order for chores (should be high priority and due/overdue, sorted by due date; followed by regular priority, sorted by due date)
 
