@@ -31,8 +31,6 @@ h2 {
 .right-align-cell {
     text-align:right;
 }
-
-
 body {
     font-family: Tahoma;
     background-color: #FFFAF0;
@@ -142,4 +140,23 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+
+
+/* experimental */
+#example-checkbox-containing-label {
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#example-checkbox-containing-label:focus-within {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }

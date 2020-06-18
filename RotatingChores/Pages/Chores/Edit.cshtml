@@ -27,4 +27,22 @@
             });
         });
     </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#example-checkbox").change(function () {
+                var $ec = $("#example-checkbox");
+                var $icon = $("#priority-icon");
+
+                $icon.removeClass("far fas");
+
+                if ($ec.is(":checked")) {
+                    $icon.addClass("fas");
+                } else {
+                    $icon.addClass("far");
+                }
+            });
+        });
+    </script>
 }

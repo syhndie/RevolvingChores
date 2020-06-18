@@ -34,11 +34,25 @@
                     <input id="date" type="text" asp-for="DueDate" class="form-control" />
                     <span asp-validation-for="DueDate" class="text-danger"></span>
                 </div>
-                <div class="form-group col-6">
-                    <label asp-for="IsHighPriority" class="control-label"></label><br />
-                    <input type="checkbox" asp-for="IsHighPriority" class="form-control bigcheck" />
-                    <span asp-validation-for="IsHighPriority" class="text-danger"></span>
-                </div>
+                @{
+                    string highPriorityButtonTitle = "Not High-Priority";
+                    string highPriorityIcon = "far fa-star fa-1.5x";
+                    if (Model.IsHighPriority)
+                    {
+                        highPriorityButtonTitle = "Is High-Priority";
+                        highPriorityIcon = "fas fa-star fa-2x";
+                    }
+                }
+               <div class="form-group col-6">
+                   <label asp-for="IsHighPriority" class="control-label"></label><br />
+                   <div class="btn-group-toggle">
+                       <label id="example-checkbox-containing-label" class="btn btn-light">
+                           <input asp-for="IsHighPriority" id="example-checkbox" type="checkbox"/>
+                           <i id="priority-icon" title="@highPriorityButtonTitle" aria-label="@highPriorityButtonTitle" class="@highPriorityIcon"></i>
+                       </label>                 
+                   </div>
+                   <span asp-validation-for="IsHighPriority" class="text-danger"></span>
+               </div>
             </div>
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
