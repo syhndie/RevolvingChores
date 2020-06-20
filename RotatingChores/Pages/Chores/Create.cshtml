@@ -19,6 +19,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
+        $(document).ready(changestarcheckbox());
         $(document).ready(function () {
             $("#date").datepicker({
                 orientation: "bottom",

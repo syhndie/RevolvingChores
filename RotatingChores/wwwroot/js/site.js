@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function changestarcheckbox() {
+    $("#example-checkbox").change(function () {
+        var $ec = $("#example-checkbox");
+        var $icon = $("#priority-icon");
 
-// Write your Javascript code.
+        $icon.removeClass("far fas");
+      
+        if ($ec.is(":checked")) {
+            $icon.addClass("fas");
+        } else {
+            $icon.addClass("far");
+        }
+    });    
+};

@@ -36,11 +36,11 @@
                 </div>
                 @{
                     string highPriorityButtonTitle = "Not High-Priority";
-                    string highPriorityIcon = "far fa-star fa-1.5x";
-                    if (Model.IsHighPriority)
+                    string highPriorityIcon = "far fa-star";
+                    if (Model!=null && Model.IsHighPriority)
                     {
                         highPriorityButtonTitle = "Is High-Priority";
-                        highPriorityIcon = "fas fa-star fa-2x";
+                        highPriorityIcon = "fas fa-star";
                     }
                 }
                <div class="form-group col-6">
