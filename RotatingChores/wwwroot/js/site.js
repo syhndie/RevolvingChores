@@ -1,6 +1,6 @@
 ﻿function changestarcheckbox() {
-    $("#example-checkbox").change(function () {
-        var $ec = $("#example-checkbox");
+    $("#star-checkbox").change(function () {
+        var $ec = $("#star-checkbox");
         var $icon = $("#priority-icon");
 
         $icon.removeClass("far fas");

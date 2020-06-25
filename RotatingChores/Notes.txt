@@ -2,7 +2,6 @@
 	clean up code for star checkbox button
 		better id
 		comment css
-		make javascript DRY
 	why doesn't logout button glow on focus?
 	restyle remaining checkboxes
 
