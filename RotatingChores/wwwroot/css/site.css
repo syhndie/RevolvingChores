@@ -1,7 +1,18 @@
 ﻿/*cindy's css*/
+
+/*all pages*/
 .container {
     max-width: 600px;
 }
+.bigcheck {
+    width: 40px;
+}
+
+.delete-btn {
+    margin-top: 120px;
+}
+
+/*index page*/
 .button-column {
     width: 3rem;
     text-align: left;
@@ -13,12 +24,7 @@
     width: 5rem;
     text-align: right;
 }
-.bigcheck {
-    width: 40px;
-}
-.delete-btn {
-    margin-top: 120px;
-}
+
 .about-text {
     font-size: larger;
 }
@@ -145,7 +151,7 @@ body {
 
 
 /* experimental */
-#star-checkbox-label {
+#star-checkbox-label, #remember-checkbox-label {
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
@@ -154,6 +160,13 @@ body {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 #star-checkbox-label:focus-within {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+#remember-checkbox-label:focus-within {
     color: #495057;
     background-color: #fff;
     border-color: #80bdff;
